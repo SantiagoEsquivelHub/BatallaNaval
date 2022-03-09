@@ -21,6 +21,9 @@ public class GUI extends JFrame {
     private Celda[][] matrizCelda = new Celda[10][10];
     private JButton guiaJuego, jugar;
 
+    private Barco fragata01, fragata02, fragata03, fragata04,submarino01,submarino02,portaavion01,destructor01, destructor02, destructor03;
+
+
     private static final String MENSAJE_GUIA = "Bienvenida a esta aventura jugador, cuando empieces a jugar debes ubicar tu flota que consta de 1 portaaviones, 2 submarinos,\n " +
             "3 destructores y 4 fratatas que vas a ubicar dando click en las celdas, empieza a dar click en el campo enemigo para intentar hundir la flota contraria.\n" +
             "Si dice un casillero que está vacío deberá decir \"agua\", si acierta dirá \"hundido\" y si acierta a algun barco completamente deberá decir \"hundido\". \n" +
@@ -63,6 +66,18 @@ public class GUI extends JFrame {
         //Create Listener Object and Control Object
         escucha = new Escucha();
         modelBatalla = new ModelBatalla();
+        portaavion01 = new Barco(0);
+        submarino01 = new Barco(0);
+        submarino02 = new Barco(0);
+        destructor01 = new Barco(0);
+        destructor02 = new Barco(0);
+        destructor03 = new Barco(0);
+        fragata01 = new Barco(0);
+        fragata02 = new Barco(0);
+        fragata03 = new Barco(0);
+        fragata04 = new Barco(0);
+
+
         //Set up JComponents
         headerProject = new Header("Batalla Naval", Color.BLACK);
         this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
@@ -177,23 +192,22 @@ public class GUI extends JFrame {
             }else{
 
                 Celda celdaSeleccionada = (Celda)e.getSource();
+
                 int fila = celdaSeleccionada.getFila()+1;
                 int columna = celdaSeleccionada.getColumna()+1;
 
-                modelBatalla.setFilasArray(fila);
-                modelBatalla.setColumnasArray(columna);
+                if(modelBatalla.comparadorFilas(fila,portaavion01.getFilasArray())){
 
+                    System.out.println("Funciona");
 
-
-                if(modelBatalla.comparadorFilas(fila)){
-                    System.out.println("las filas estan seguidas");
                 }
 
+                portaavion01.setFilasArray(fila);
+                System.out.println(portaavion01.getContador()+" valor contador");
+                portaavion01.setColumnasArray(columna);
 
-
-                if(modelBatalla.getContador() == 8){
+                if(portaavion01.getContador() == 4 ) {
                     System.out.println("4 celdas seleccionadas");
-
                     JOptionPane.showMessageDialog(null,
                         "Posiciones del portaaviones registrada,\n" +
                                 "ahora elige las posiciones de los 2 submarinos ",
@@ -205,8 +219,8 @@ public class GUI extends JFrame {
 
 
                 celdaSeleccionada.setBackground(Color.YELLOW);
-
-
+                celdaSeleccionada.removeActionListener(escucha);
+}
 
                /*JOptionPane.showMessageDialog(null,
                         "Fila: "+fila+", Columna: "+columna+"",
@@ -217,4 +231,4 @@ public class GUI extends JFrame {
 
         }
     }
-}
+
