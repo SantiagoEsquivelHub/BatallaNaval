@@ -19,7 +19,7 @@ public class GUI extends JFrame {
     private JLabel bienvenida, imagen;
     private JPanel panelBienvenido, tableroPosicion, tableroPrincipal;
     private Celda[][] matrizCelda = new Celda[10][10];
-    private JButton guiaJuego, jugar;
+    private JButton guiaJuego, jugar, submarino;
 
     private Barco fragata01, fragata02, fragata03, fragata04,submarino01,submarino02,portaavion01,destructor01, destructor02, destructor03;
 
@@ -119,7 +119,13 @@ public class GUI extends JFrame {
         constraints.gridx=1;
         constraints.gridy=3;
         constraints.gridwidth = 3;
-        panelBienvenido.add(imagen, constraints);
+        //panelBienvenido.add(imagen, constraints);
+
+        submarino = new JButton("Submarino");
+        constraints.gridx=0;
+        constraints.gridy=3;
+        constraints.gridwidth = 1;
+        panelBienvenido.add(submarino, constraints);
 
 /*
         tableroPosicion = new JPanel();
@@ -167,6 +173,7 @@ public class GUI extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+
             if(e.getSource() == guiaJuego){
                 JOptionPane.showMessageDialog(null,
                         MENSAJE_GUIA,
@@ -174,6 +181,7 @@ public class GUI extends JFrame {
                         "PopUp Dialog",
                         JOptionPane.INFORMATION_MESSAGE);
             }else if(e.getSource() == jugar){
+
                 jugar.removeActionListener(escucha);
                 imagen.setVisible(false);
                 JOptionPane.showMessageDialog(null,
@@ -190,36 +198,141 @@ public class GUI extends JFrame {
                 }
 
             }else{
-
                 Celda celdaSeleccionada = (Celda)e.getSource();
+
+                celdaSeleccionada.setBackground(Color.YELLOW);
+                celdaSeleccionada.removeActionListener(escucha);
 
                 int fila = celdaSeleccionada.getFila()+1;
                 int columna = celdaSeleccionada.getColumna()+1;
 
-                if(modelBatalla.comparadorFilas(fila,portaavion01.getFilasArray())){
-
-                    System.out.println("Funciona");
-
-                }
-
                 portaavion01.setFilasArray(fila);
-                System.out.println(portaavion01.getContador()+" valor contador");
+                System.out.println(fila);
+
                 portaavion01.setColumnasArray(columna);
 
-                if(portaavion01.getContador() == 4 ) {
-                    System.out.println("4 celdas seleccionadas");
-                    JOptionPane.showMessageDialog(null,
-                        "Posiciones del portaaviones registrada,\n" +
-                                "ahora elige las posiciones de los 2 submarinos ",
 
-                        "PopUp Dialog",
-                        JOptionPane.INFORMATION_MESSAGE);
+
+                if(portaavion01.getContador() == 4 ) {
+
+                    boolean comparadorIgualdadFilas = modelBatalla.comparadorIgualdad(fila,portaavion01.getFilasArray());
+                    boolean comparadorSeguidosFilas = modelBatalla.comparadorSeguidos(portaavion01.getFilasArray());
+                    boolean comparadorIgualdadColumnas = modelBatalla.comparadorIgualdad(columna,portaavion01.getColumnasArray());
+                    boolean comparadorSeguidosColumnas = modelBatalla.comparadorSeguidos(portaavion01.getColumnasArray());
+
+                    if((comparadorIgualdadFilas && comparadorSeguidosColumnas) || (comparadorIgualdadColumnas && comparadorSeguidosFilas) ){
+                        System.out.println("4 celdas seleccionadas");
+                       JOptionPane.showMessageDialog(null,
+                                "Posiciones del portaaviones registrada,\n" +
+                                        "ahora elige las posiciones de los 2 submarinos.",
+
+                                "PopUp Dialog",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        submarino.addActionListener(escucha);
+
+
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Repite la seleccion del portaaviones",
+
+                                "PopUp Dialog",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        //Se reinicia el color de todas las celdas del tablero principal.
+
+                        for(int i = 0; i < 10; i++){
+
+                            for(int j = 0; j < 10; j++){
+                                matrizCelda[i][j].setBackground(Color.CYAN);
+                                matrizCelda[i][j].addActionListener(escucha);
+                            }
+
+                        }
+                        celdaSeleccionada.setBackground(Color.CYAN);
+
+                    }
+
+
+
+
+                }
+
+                if(e.getSource() == submarino) {
+                    fila =0;
+                    columna = 0;
+
+                    if (submarino01.getContador() == 3) {
+
+
+                        boolean comparadorIgualdadFilas = modelBatalla.comparadorIgualdad(fila, submarino01.getFilasArray());
+                        boolean comparadorSeguidosFilas = modelBatalla.comparadorSeguidos(submarino01.getFilasArray());
+                        boolean comparadorIgualdadColumnas = modelBatalla.comparadorIgualdad(columna, submarino01.getColumnasArray());
+                        boolean comparadorSeguidosColumnas = modelBatalla.comparadorSeguidos(submarino01.getColumnasArray());
+
+                        if ((comparadorIgualdadFilas && comparadorSeguidosColumnas) || (comparadorIgualdadColumnas && comparadorSeguidosFilas)) {
+                            System.out.println("4 celdas seleccionadas");
+                            JOptionPane.showMessageDialog(null,
+                                    "Posiciones del portaaviones registrada,\n" +
+                                            "ahora elige las posiciones de los 2 submarinos ",
+
+                                    "PopUp Dialog",
+                                    JOptionPane.INFORMATION_MESSAGE);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Repite la seleccion del portaaviones",
+
+                                    "PopUp Dialog",
+                                    JOptionPane.INFORMATION_MESSAGE);
+
+                            //Se reinicia el color de todas las celdas del tablero principal.
+
+                            for (int i = 0; i < 10; i++) {
+
+                                for (int j = 0; j < 10; j++) {
+                                    matrizCelda[i][j].setBackground(Color.CYAN);
+                                    matrizCelda[i][j].addActionListener(escucha);
+                                }
+
+                            }
+                            celdaSeleccionada.setBackground(Color.CYAN);
+
+                        }
+
+                    }
 
                 }
 
 
-                celdaSeleccionada.setBackground(Color.YELLOW);
-                celdaSeleccionada.removeActionListener(escucha);
+
+
+
+
+
+
+                  /*  for(int i = 0; i < portaavion01.getFilasArray().size(); i++){
+
+                        System.out.println("Fila arreglo malo:"+portaavion01.getFilasArray().get(i)+"");
+                        portaavion01.getFilasArray().remove(portaavion01.getFilasArray().get(i));
+                        //System.out.println("Tamano arreglo malo:"+portaavion01.getFilasArray().size()+"");
+                    }*/
+
+
+
+
+
+                /*else{
+
+                    JOptionPane.showMessageDialog(null,
+                            "Selecciona de nuevo",
+
+                            "PopUp Dialog",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }*/
+
+
+
 }
 
                /*JOptionPane.showMessageDialog(null,
