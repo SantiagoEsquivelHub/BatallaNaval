@@ -16,7 +16,9 @@ public class Celda extends JButton {
     }
 
     public int getColumna() {
+
         return columna;
+
     }
 
     public void setColumna(int columna) {
@@ -24,7 +26,9 @@ public class Celda extends JButton {
     }
 
     public int getFila() {
+
         return fila;
+
     }
 
     public void setFila(int fila) {
