@@ -8,7 +8,15 @@ import java.util.ArrayList;
 
 
 public class ModelBatalla {
+int error= 2;
 
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
+    }
 
     public boolean comparadorIgualdad(int numero, ArrayList<Integer> array) {
 
@@ -17,7 +25,7 @@ public class ModelBatalla {
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i) == numero) {
                 contador++;
-                System.out.println("ContadorIgualdad"+contador+"");
+                //System.out.println("ContadorIgualdad"+contador+"");
             }
         }
 
@@ -39,11 +47,11 @@ public class ModelBatalla {
                 int numSig = i+1;
                 if(numSig < array.size()){
 
-                    System.out.println("numSig= "+numSig+"");
+                    //System.out.println("numSig= "+numSig+"");
 
                     if ((array.get(numSig) - array.get(i)) == 1){
                     contador++;
-                    System.out.println("Cuantos num estan seguidos= "+contador+"");
+                    //System.out.println("Cuantos num estan seguidos= "+contador+"");
                     }
 
                 }
@@ -59,53 +67,29 @@ public class ModelBatalla {
     }
 
 
-    public void c (boolean igualdadFilas, boolean seguidosColumnas, boolean igualdadColumnas, boolean seguidosFilas, Celda[][] matrizCelda, Barco portaavion01) {
-        if (portaavion01.getContador() == 4) {
-            if ((igualdadFilas && seguidosColumnas) || (igualdadColumnas && seguidosFilas)){
-                System.out.println("4 celdas seleccionadas");
-                JOptionPane.showMessageDialog(null,
-                        "Posiciones del portaaviones registrada,\n" +
-                                "ahora elige las posiciones de los 2 submarinos ",
-
-                        "PopUp Dialog",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Repite la seleccion del portaaviones",
-
-                        "PopUp Dialog",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-                //Se reinicia el color de todas las celdas del tablero principal.
-              /*  for (int i = 0; i < 10; i++) {
-
-                    for (int j = 0; j < 10; j++) {
-                        matrizCelda[i][j].setBackground(Color.CYAN);
-
-                        //matrizCelda[i][j].addActionListener(escucha);
-                    }
-
-                }*/
-
-            }
-
-        }
-    }
-
-
-    public void c2 (boolean igualdadFilas, boolean seguidosColumnas, boolean igualdadColumnas, boolean seguidosFilas, Celda[][] matrizCelda, Barco destructor01) {
+    public boolean c2 (boolean igualdadFilas, boolean seguidosColumnas, boolean igualdadColumnas, boolean seguidosFilas, Celda[][] matrizCelda, Barco destructor01, ArrayList<Celda> celditas, ActionListener escucha) {
         //if (destructor01.getContador() == 2) {
             if ((igualdadFilas && seguidosColumnas) || (igualdadColumnas && seguidosFilas)){
-                System.out.println("1 celda seleccionada");
-
+                //System.out.println("1 celda seleccionada");
+            return true;
             } else {
+                error--;
                 JOptionPane.showMessageDialog(null,
-                        "Repite la seleccion del destructor",
+                        "Repite la seleccion del destructor\n" +
+                                "te quedan "+getError()+" intento, al llegar a 0 se cierra el juego",
 
                         "PopUp Dialog",
                         JOptionPane.INFORMATION_MESSAGE);
 
 
+                    if(error == 0){
+                        setError(2);
+                        System. exit(0);
+                    }
+
+                    resetCelda(matrizCelda,celditas,escucha);
+                    celditas.clear();
+                return false;
             }
 
         //}
@@ -177,14 +161,15 @@ public class ModelBatalla {
     }
 
 
-    public void resetCelda( Celda[][] matrizCelda, ArrayList<Celda> miCelda, ActionListener escucha ){
+    public Celda[][] resetCelda( Celda[][] matrizCelda, ArrayList<Celda> miCelda, ActionListener escucha ){
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < miCelda.size(); i++){
             int fila = miCelda.get(i).getFila();
             int columna = miCelda.get(i).getColumna();
             matrizCelda[fila][columna].setBackground(Color.cyan);
-            matrizCelda[fila][columna].addActionListener(escucha);
+             matrizCelda[fila][columna].addActionListener(escucha);
         }
+        return matrizCelda;
     }
 
     }

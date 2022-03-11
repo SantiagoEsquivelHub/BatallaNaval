@@ -28,7 +28,7 @@ public class GUI extends JFrame {
 
     private Barco fragata01, fragata02, fragata03, fragata04,submarino01,submarino02,portaavion01,destructor01, destructor02, destructor03;
     private ArrayList<Barco> fragatas, destructores, submarinos;
-    private ArrayList<Celda> celdasSeleccionadas;
+    private ArrayList<Celda> celdasSeleccionadas, celdasDest01, celdasDest02, celdasDest03,celditasPortaavion;
     private static final String MENSAJE_GUIA = "Bienvenida a esta aventura jugador, cuando empieces a jugar debes ubicar tu flota que consta de 1 portaaviones, 2 submarinos,\n " +
             "3 destructores y 4 fratatas que vas a ubicar dando click en las celdas, empieza a dar click en el campo enemigo para intentar hundir la flota contraria.\n" +
             "Si dice un casillero que está vacío deberá decir \"agua\", si acierta dirá \"hundido\" y si acierta a algun barco completamente deberá decir \"hundido\". \n" +
@@ -74,6 +74,10 @@ public class GUI extends JFrame {
         escuchaFragatas = new EscuchaFragatas();
         escuchaSubmarinos = new EscuchaSubmarinos();
         escuchaPortaavion = new EscuchaPortaavion();
+        celdasDest01 = new ArrayList<Celda>();
+        celdasDest02 = new ArrayList<Celda>();
+        celdasDest03 = new ArrayList<Celda>();
+        celditasPortaavion = new ArrayList<Celda>();
         modelBatalla = new ModelBatalla();
         portaavion01 = new Barco(0);
         submarino01 = new Barco(0);
@@ -258,77 +262,10 @@ public class GUI extends JFrame {
 
                     for (int j = 0; j < 10; j++) {
                         matrizCelda[i][j].addActionListener(escucha);
-                        //matrizCelda[i][j].addActionListener(escuchaFragatas);
-                        //matrizCelda[i][j].addActionListener(escuchaDestructores);
                     }
                 }
 
             }
-
-            /*else if(e.getSource() == portaavion){
-                Celda celdaSeleccionada1 = (Celda)e.getSource();
-                celdaSeleccionada1.setBackground(Color.YELLOW);
-                celdaSeleccionada1.removeActionListener(escucha);
-
-                portaavion.setVisible(true);
-
-                int fila = celdaSeleccionada1.getFila()+1;
-                int columna = celdaSeleccionada1.getColumna()+1;
-
-                portaavion01.setFilasArray(fila);
-                System.out.println(fila);
-
-                portaavion01.setColumnasArray(columna);
-
-
-
-                if(portaavion01.getContador() == 4) {
-
-                    boolean comparadorIgualdadFilas = modelBatalla.comparadorIgualdad(fila,portaavion01.getFilasArray());
-                    boolean comparadorSeguidosFilas = modelBatalla.comparadorSeguidos(portaavion01.getFilasArray());
-                    boolean comparadorIgualdadColumnas = modelBatalla.comparadorIgualdad(columna,portaavion01.getColumnasArray());
-                    boolean comparadorSeguidosColumnas = modelBatalla.comparadorSeguidos(portaavion01.getColumnasArray());
-
-                    if((comparadorIgualdadFilas && comparadorSeguidosColumnas) || (comparadorIgualdadColumnas && comparadorSeguidosFilas) ){
-                        System.out.println("4 celdas seleccionadas");
-                        JOptionPane.showMessageDialog(null,
-                                "Posiciones del portaaviones registrada,\n" +
-                                        "ahora elige las posiciones de los 2 submarinos.",
-
-                                "PopUp Dialog",
-                                JOptionPane.INFORMATION_MESSAGE);
-
-                        submarino.addActionListener(escucha);
-
-
-                    }else{
-                        JOptionPane.showMessageDialog(null,
-                                "Repite la seleccion del portaaviones",
-
-                                "PopUp Dialog",
-                                JOptionPane.INFORMATION_MESSAGE);
-
-                        //Se reinicia el color de todas las celdas del tablero principal.
-
-                        for(int i = 0; i < 10; i++){
-
-                            for(int j = 0; j < 10; j++){
-                                matrizCelda[i][j].setBackground(Color.CYAN);
-                                matrizCelda[i][j].addActionListener(escucha);
-                            }
-
-                        }
-                        celdaSeleccionada1.setBackground(Color.CYAN);
-
-                    }
-
-
-
-
-                }
-
-
-            }*/
 
         }
     }
@@ -340,6 +277,7 @@ public class GUI extends JFrame {
 
 
             if(e.getSource() == fragatasBtn){
+                fragatasBtn.setEnabled(false);
                 for (int i = 0; i < 10; i++) {
 
                     for (int j = 0; j < 10; j++) {
@@ -360,25 +298,33 @@ public class GUI extends JFrame {
                 int columna = celdaSeleccionada.getColumna() + 1;
 
 
-                celdaSeleccionada.removeActionListener(escucha);
+                /*celdaSeleccionada.removeActionListener(escucha);
                 celdaSeleccionada.removeActionListener(escuchaFragatas);
-                celdaSeleccionada.removeActionListener(escuchaDestructores);
+                celdaSeleccionada.removeActionListener(escuchaDestructores);*/
 
                 if (fragata01.getContador() == 1) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata01.getContador());
-                    fragata01.setContador(0);celdaSeleccionada.setBackground(Color.RED);
+                    fragata01.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    celdaSeleccionada.removeActionListener(escuchaFragatas);
+                    celdaSeleccionada.removeActionListener(escuchaDestructores);
                     //System.out.println("fragata01Contador="+fragata01.getContador()+"");
                 } else if (fragata02.getContador() == 2) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata02.getContador());
-                    fragata02.setContador(0);celdaSeleccionada.setBackground(Color.RED);
+                    fragata02.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    celdaSeleccionada.removeActionListener(escuchaFragatas);
+                    celdaSeleccionada.removeActionListener(escuchaDestructores);
                     //System.out.println("fragata02Contador="+fragata02.getContador()+"");
                 } else if (fragata03.getContador() == 3) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata03.getContador());
-                    fragata03.setContador(0);celdaSeleccionada.setBackground(Color.RED);
+                    fragata03.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    celdaSeleccionada.removeActionListener(escuchaFragatas);
+                    celdaSeleccionada.removeActionListener(escuchaDestructores);
                     //System.out.println("fragata03Contador="+fragata03.getContador()+"");
                 } else if (fragata04.getContador() == 4) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata04.getContador());
-                    fragata04.setContador(0);celdaSeleccionada.setBackground(Color.RED);
+                    fragata04.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    celdaSeleccionada.removeActionListener(escuchaFragatas);
+                    celdaSeleccionada.removeActionListener(escuchaDestructores);
 
                     destructor01.setContador(1);
                     destructor02.setContador(1);
@@ -412,6 +358,7 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if(e.getSource() == destructoresBtn){
+                    destructoresBtn.setEnabled(false);
                     JOptionPane.showMessageDialog(null,
                             "Selecciona 3 destructores de 2 casillas cada una,\n"+
                             "DEBEN estar seguidas",
@@ -438,6 +385,10 @@ public class GUI extends JFrame {
                             case 1:
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
 
+                                celdasDest01.add(celdaSeleccionada);
+                                celdaSeleccionada.removeActionListener(escuchaDestructores);
+                                System.out.println("celdasDest01="+celdasDest01.size()+"");
+
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
                                 celdaSeleccionada.setBackground(Color.GREEN);
 
@@ -445,23 +396,50 @@ public class GUI extends JFrame {
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
                                 break;
                             case 2:
-                                System.out.println("destructor01Contador=" + destructor01.getContador() + "");
+                                System.out.println("destructor01ContadorDEBESER2=" + destructor01.getContador() + "");
                                 System.out.println("CASO 22222222222");
+
+                                celdasDest01.add(celdaSeleccionada);
+
+
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
+                                celdaSeleccionada.setBackground(Color.GREEN);
+                                System.out.println("destructor01ContadorDEBESER2=" + destructor01.getContador() + "");
+
+
+                                System.out.println("celdasDest01="+celdasDest01.size()+"");
+
 
                                 boolean comparadorIgualdadFilas = modelBatalla.comparadorIgualdad(fila, destructor01.getFilasArray());
                                 boolean comparadorSeguidosFilas = modelBatalla.comparadorSeguidos(destructor01.getFilasArray());
                                 boolean comparadorIgualdadColumnas = modelBatalla.comparadorIgualdad(columna, destructor01.getColumnasArray());
                                 boolean comparadorSeguidosColumnas = modelBatalla.comparadorSeguidos(destructor01.getColumnasArray());
 
-                                destructor01.setContador(3);
-                                modelBatalla.c2(comparadorIgualdadFilas, comparadorSeguidosColumnas, comparadorIgualdadColumnas, comparadorSeguidosFilas, matrizCelda, destructor01);
-                                celdaSeleccionada.setBackground(Color.GREEN);
-                                break;
+                                System.out.println("CONTADOR ANTES DE ERROR="+destructor01.getContador()+"");
+                                if(modelBatalla.c2(comparadorIgualdadFilas, comparadorSeguidosColumnas, comparadorIgualdadColumnas, comparadorSeguidosFilas, matrizCelda, destructor01, celdasDest01, escuchaDestructores)){
+                                    destructor01.setContador(3);
+                                    System.out.println("CONTADOR EN 3");
+                                    break;
+
+                                }else{
+                                    destructor01.setContador(1);
+                                    celdasDest01.clear();
+                                    destructor01.getFilasArray().clear();
+                                    destructor01.getColumnasArray().clear();
+                                    System.out.println("CONTADOR EN 2");
+                                    System.out.println("SIZEEEEEEEEEceldasDest01="+celdasDest01.size()+"");
+                                    System.out.println("CONTADOR DE DESPUES DE ERROR="+destructor01.getContador()+"");
+                                    break;
+                                }
+
                             case 3:
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
 
                                 System.out.println("AQUI ESTOYYYYYYYYYYYYYYYYYYY");
+
+                                celdasDest02.add(celdaSeleccionada);
+                                celdaSeleccionada.removeActionListener(escuchaDestructores);
+                                System.out.println("celdasDest02="+celdasDest02.size()+"");
 
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
                                 celdaSeleccionada.setBackground(Color.GREEN);
@@ -471,6 +449,9 @@ public class GUI extends JFrame {
                                 break;
                             case 4:
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
+
+                                celdasDest02.add(celdaSeleccionada);
+                                System.out.println("celdasDest02="+celdasDest02.size()+"");
 
                                 System.out.println("SEBASSSSSSSSSSSSSSSSSSSSSSSS");
 
@@ -482,14 +463,26 @@ public class GUI extends JFrame {
 
 
                                 celdaSeleccionada.setBackground(Color.GREEN);
-                                destructor01.setContador(5);
-                                modelBatalla.c2(comparadorIgualdadFilas2, comparadorSeguidosColumnas2, comparadorIgualdadColumnas2, comparadorSeguidosFilas2, matrizCelda, destructor01);
-                                System.out.println("destructor02Contador=" + destructor01.getContador() + "");
-                                break;
+
+                                if(modelBatalla.c2(comparadorIgualdadFilas2, comparadorSeguidosColumnas2, comparadorIgualdadColumnas2, comparadorSeguidosFilas2, matrizCelda, destructor01, celdasDest02, escuchaDestructores)){
+                                    destructor01.setContador(5);
+                                    break;
+                                }else{
+                                    destructor01.setContador(3);
+                                    celdasDest02.clear();
+                                    destructor02.getFilasArray().clear();
+                                    destructor02.getColumnasArray().clear();
+                                    break;
+                                }
+
                             case 5:
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
 
                                 System.out.println("caso 5");
+
+                                celdasDest03.add(celdaSeleccionada);
+                                celdaSeleccionada.removeActionListener(escuchaDestructores);
+                                System.out.println("celdasDest03="+celdasDest03.size()+"");
 
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
                                 celdaSeleccionada.setBackground(Color.GREEN);
@@ -502,6 +495,9 @@ public class GUI extends JFrame {
 
                                 System.out.println("caso 6");
 
+                                celdasDest03.add(celdaSeleccionada);
+                                System.out.println("celdasDest03="+celdasDest03.size()+"");
+
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
                                 boolean comparadorIgualdadFilas3 = modelBatalla.comparadorIgualdad(fila, destructor03.getFilasArray());
                                 boolean comparadorSeguidosFilas3 = modelBatalla.comparadorSeguidos(destructor03.getFilasArray());
@@ -510,21 +506,32 @@ public class GUI extends JFrame {
 
 
                                 celdaSeleccionada.setBackground(Color.GREEN);
-                                destructor01.setContador(0);
-                                modelBatalla.c2(comparadorIgualdadFilas3, comparadorSeguidosColumnas3, comparadorIgualdadColumnas3, comparadorSeguidosFilas3, matrizCelda, destructor01);
-                                System.out.println("destructor02Contador=" + destructor01.getContador() + "");
 
-                                destructoresBtn.setEnabled(false);
-                                submarinosBtn.setEnabled(true);
-                                submarino01.setContador(1);
-                                JOptionPane.showMessageDialog(null,
-                                        "3 destructores seleccionadas correctamente\n"+
-                                                "presiona el boton correspondiente de arriba",
+                                if(modelBatalla.c2(comparadorIgualdadFilas3, comparadorSeguidosColumnas3, comparadorIgualdadColumnas3, comparadorSeguidosFilas3, matrizCelda, destructor01, celdasDest03, escuchaDestructores)){
+                                    destructor01.setContador(0);
+                                    destructoresBtn.setEnabled(false);
+                                    submarinosBtn.setEnabled(true);
+                                    submarino01.setContador(1);
+                                    JOptionPane.showMessageDialog(null,
+                                            "3 destructores seleccionadas correctamente\n"+
+                                                    "presiona el boton correspondiente de arriba",
 
-                                        "PopUp Dialog",
-                                        JOptionPane.INFORMATION_MESSAGE);
+                                            "PopUp Dialog",
+                                            JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+                                }else{
+                                    destructor01.setContador(5);
+                                    celdasDest03.clear();
+                                    destructor03.getFilasArray().clear();
+                                    destructor03.getColumnasArray().clear();
+                                    break;
+                                }
 
-                                break;
+
+
+
+
+
                         }
 
                 }
@@ -537,6 +544,7 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if(e.getSource() == submarinosBtn){
+                submarinosBtn.setEnabled(false);
                 JOptionPane.showMessageDialog(null,
                         "Selecciona 2 submarinos de 3 casillas cada una,\n"+
                                 "DEBEN estar seguidas",
@@ -587,7 +595,7 @@ public class GUI extends JFrame {
                         boolean comparadorSeguidosColumnas = modelBatalla.comparadorSeguidos(submarino01.getColumnasArray());
 
                         submarino01.setContador(4);
-                        modelBatalla.c2(comparadorIgualdadFilas, comparadorSeguidosColumnas, comparadorIgualdadColumnas, comparadorSeguidosFilas, matrizCelda, submarino01);
+                        modelBatalla.c2(comparadorIgualdadFilas, comparadorSeguidosColumnas, comparadorIgualdadColumnas, comparadorSeguidosFilas, matrizCelda, submarino01, celditasPortaavion, escuchaSubmarinos);
                         celdaSeleccionada.setBackground(Color.PINK);
                         break;
                     case 4:
@@ -613,7 +621,7 @@ public class GUI extends JFrame {
 
                         celdaSeleccionada.setBackground(Color.PINK);
                         submarino01.setContador(6);
-                        modelBatalla.c2(comparadorIgualdadFilas2, comparadorSeguidosColumnas2, comparadorIgualdadColumnas2, comparadorSeguidosFilas2, matrizCelda, submarino01);
+                        modelBatalla.c2(comparadorIgualdadFilas2, comparadorSeguidosColumnas2, comparadorIgualdadColumnas2, comparadorSeguidosFilas2, matrizCelda, submarino01, celditasPortaavion, escuchaSubmarinos);
                         System.out.println("submarino02Contador=" + submarino01.getContador() + "");
                         break;
                     case 6:
@@ -630,7 +638,7 @@ public class GUI extends JFrame {
 
                         celdaSeleccionada.setBackground(Color.PINK);
 
-                        modelBatalla.c2(comparadorIgualdadFilas3, comparadorSeguidosColumnas3, comparadorIgualdadColumnas3, comparadorSeguidosFilas3, matrizCelda, submarino01);
+                        modelBatalla.c2(comparadorIgualdadFilas3, comparadorSeguidosColumnas3, comparadorIgualdadColumnas3, comparadorSeguidosFilas3, matrizCelda, submarino01, celditasPortaavion, escuchaSubmarinos);
                         System.out.println("submarino02Contador=" + submarino01.getContador() + "");
 
                         submarinosBtn.setEnabled(false);
@@ -658,6 +666,7 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == portaavionesBtn) {
+                portaavionesBtn.setEnabled(false);
                 JOptionPane.showMessageDialog(null,
                         "Selecciona 1 portaavion de 4 casillas,\n" +
                                 "DEBEN estar seguidas",
@@ -681,6 +690,9 @@ public class GUI extends JFrame {
                 int fila = celdaSeleccionada1.getFila() + 1;
                 int columna = celdaSeleccionada1.getColumna() + 1;
 
+                celditasPortaavion.add(celdaSeleccionada1);
+                System.out.println("CeldasPortaaviones="+celditasPortaavion.size()+"");
+
                 portaavion01.setFilasArray(fila);
                 System.out.println(fila);
 
@@ -695,7 +707,7 @@ public class GUI extends JFrame {
                     boolean comparadorSeguidosColumnas = modelBatalla.comparadorSeguidos(portaavion01.getColumnasArray());
 
 
-                    modelBatalla.c2(comparadorIgualdadFilas, comparadorSeguidosColumnas, comparadorIgualdadColumnas, comparadorSeguidosFilas, matrizCelda, portaavion01);
+                    modelBatalla.c2(comparadorIgualdadFilas, comparadorSeguidosColumnas, comparadorIgualdadColumnas, comparadorSeguidosFilas, matrizCelda, portaavion01, celditasPortaavion, escuchaPortaavion);
                     fragatasBtn.setVisible(false);
                     destructoresBtn.setVisible(false);
                     submarinosBtn.setVisible(false);
