@@ -16,7 +16,7 @@ public class ModelBatalla {
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i) == numero) {
                 contador++;
-                System.out.println(contador);
+                System.out.println("ContadorIgualdad"+contador+"");
             }
         }
 
@@ -76,7 +76,7 @@ public class ModelBatalla {
                         JOptionPane.INFORMATION_MESSAGE);
 
                 //Se reinicia el color de todas las celdas del tablero principal.
-                for (int i = 0; i < 10; i++) {
+              /*  for (int i = 0; i < 10; i++) {
 
                     for (int j = 0; j < 10; j++) {
                         matrizCelda[i][j].setBackground(Color.CYAN);
@@ -84,7 +84,7 @@ public class ModelBatalla {
                         //matrizCelda[i][j].addActionListener(escucha);
                     }
 
-                }
+                }*/
 
             }
 
@@ -155,6 +155,22 @@ public class ModelBatalla {
             System.out.println("Fila destructor03= "+fila+"");
             barcos.get(2).setColumnasArray(columna);
             System.out.println("Columna destructor03= "+columna+"");
+        }
+
+    }
+
+    public void submarinos(ArrayList<Barco> barcos, int fila, int columna, int contador) {
+
+        if(contador == 1 || contador == 2 || contador == 3 ){
+            barcos.get(0).setFilasArray(fila);
+            System.out.println("Fila submarino01= "+fila+"");
+            barcos.get(0).setColumnasArray(columna);
+            System.out.println("Columna submarino01= "+columna+"");
+        }else if(contador == 4 || contador == 5 || contador == 6){
+            barcos.get(1).setFilasArray(fila);
+            System.out.println("Fila submarino02= "+fila+"");
+            barcos.get(1).setColumnasArray(columna);
+            System.out.println("Columna submarino02= "+columna+"");
         }
 
     }
