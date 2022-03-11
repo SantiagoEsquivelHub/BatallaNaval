@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+
 public class ModelBatalla {
 
 
@@ -173,6 +174,17 @@ public class ModelBatalla {
             System.out.println("Columna submarino02= "+columna+"");
         }
 
+    }
+
+
+    public void resetCelda( Celda[][] matrizCelda, ArrayList<Celda> miCelda, ActionListener escucha ){
+
+        for(int i = 0; i < 10; i++){
+            int fila = miCelda.get(i).getFila();
+            int columna = miCelda.get(i).getColumna();
+            matrizCelda[fila][columna].setBackground(Color.cyan);
+            matrizCelda[fila][columna].addActionListener(escucha);
+        }
     }
 
     }

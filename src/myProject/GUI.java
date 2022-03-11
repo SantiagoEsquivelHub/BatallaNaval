@@ -199,6 +199,9 @@ public class GUI extends JFrame {
 
             for(int j = 0; j < 10; j++){
                 matrizCelda[i][j] = new Celda(i,j);
+
+                System.out.println(matrizCelda[i][j].columna);
+                System.out.println(matrizCelda[i][j].fila);
                 //matrizCelda[i][j].addActionListener(escucha);
                 tableroPrincipal.add(matrizCelda[i][j]);
             }
