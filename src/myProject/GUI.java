@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class is used for ...
@@ -41,12 +42,7 @@ public class GUI extends JFrame {
                                                 "Destructores -> Rosado\n"+
                                                 "Magenta-> Purpura\n";
 
-    private static final String GUIA_SUBMARINOS = "";
 
-    private static final String GUIA_DESTRUCTORES = "";
-
-    private static final String GUIA_FRAGATAS = "";
-    private Object Celda;
 
 
     /**
@@ -223,8 +219,6 @@ public class GUI extends JFrame {
             for(int j = 0; j < 10; j++){
                 matrizCelda[i][j] = new Celda(i,j);
 
-                System.out.println(matrizCelda[i][j].columna);
-                System.out.println(matrizCelda[i][j].fila);
                 //matrizCelda[i][j].addActionListener(escucha);
                 tableroPosicion.add(matrizCelda[i][j]);
             }
@@ -235,8 +229,7 @@ public class GUI extends JFrame {
             for(int j = 0; j < 10; j++){
                 matrizCeldaRival[i][j] = new Celda(i,j);
 
-                System.out.println(matrizCeldaRival[i][j].columna);
-                System.out.println(matrizCeldaRival[i][j].fila);
+
                 //matrizCelda[i][j].addActionListener(escucha);
                 tableroPrincipal.add(matrizCeldaRival[i][j]);
                 matrizCeldaRival[i][j].cambiarFondo();
@@ -267,6 +260,7 @@ public class GUI extends JFrame {
 
 
             if (e.getSource() == guiaJuego) {
+
                 JOptionPane.showMessageDialog(null,
                         MENSAJE_GUIA,
 

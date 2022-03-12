@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ModelBatalla {
@@ -39,8 +40,8 @@ int error= 2;
 
     public boolean comparadorSeguidos(ArrayList<Integer> array) {
 
+        Collections.sort(array);
         int contador = 0;
-
 
 
             for (int i = 0; i < array.size(); i++) {
