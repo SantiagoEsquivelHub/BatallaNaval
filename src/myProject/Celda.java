@@ -25,8 +25,6 @@ public class Celda extends JButton {
     }
 
 
-
-
     public Celda(int fila, int columna){
         this.fila = fila;
         this.columna = columna;
@@ -52,5 +50,13 @@ public class Celda extends JButton {
     public void setFila(int fila) {
 
         this.fila = fila;
+    }
+
+    public void cambiarFondo(){
+        setBackground(Color.gray);
+    }
+
+    public void restaurarFondo(){
+        setBackground(Color.cyan);
     }
 }

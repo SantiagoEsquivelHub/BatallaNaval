@@ -161,13 +161,23 @@ int error= 2;
     }
 
 
-    public Celda[][] resetCelda( Celda[][] matrizCelda, ArrayList<Celda> miCelda, ActionListener escucha ){
+    public Celda[][] resetCelda( Celda[][] matrizCelda, ArrayList<Celda> miCelda, ActionListener escucha){
 
         for(int i = 0; i < miCelda.size(); i++){
             int fila = miCelda.get(i).getFila();
             int columna = miCelda.get(i).getColumna();
             matrizCelda[fila][columna].setBackground(Color.cyan);
              matrizCelda[fila][columna].addActionListener(escucha);
+        }
+        return matrizCelda;
+    }
+
+    public Celda[][] eliminarEscuchasAnteriores( Celda[][] matrizCelda, ArrayList<Celda> misCeldas, ActionListener escucha){
+        for(int i = 0; i < misCeldas.size(); i++){
+            int fila = misCeldas.get(i).getFila();
+            int columna = misCeldas.get(i).getColumna();
+            matrizCelda[fila][columna].removeActionListener(escucha);
+            System.out.println("SE QUITARON TODOS LOS ESCUCHAS");
         }
         return matrizCelda;
     }

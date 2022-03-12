@@ -19,23 +19,27 @@ public class GUI extends JFrame {
     private EscuchaFragatas escuchaFragatas;
     private EscuchaSubmarinos escuchaSubmarinos;
     private EscuchaPortaavion escuchaPortaavion;
+    private EscuchaEmpezarJuego escuchaEmpezarJuego;
     private ModelBatalla modelBatalla;
     private ImageIcon imagenBienvenida;
     private JLabel bienvenida, imagen;
     private JPanel panelBienvenido, tableroPosicion, tableroPrincipal;
     private Celda[][] matrizCelda = new Celda[10][10];
+    private Celda[][] matrizCeldaRival = new Celda[10][10];
     private JButton guiaJuego, jugar, fragatasBtn, destructoresBtn, submarinosBtn, portaavionesBtn, empezarJuego;
-
+    private JTextArea guiaColores;
     private Barco fragata01, fragata02, fragata03, fragata04,submarino01,submarino02,portaavion01,destructor01, destructor02, destructor03;
     private ArrayList<Barco> fragatas, destructores, submarinos;
-    private ArrayList<Celda> celdasSeleccionadas, celdasDest01, celdasDest02, celdasDest03, celdasSub01, celdasSub02, celditasPortaavion;
+    private ArrayList<Celda> fragatasAnteriores, destructoresAnteriores, submarinosAnteriores, celdasDest01, celdasDest02, celdasDest03, celdasSub01, celdasSub02, celditasPortaavion;
     private static final String MENSAJE_GUIA = "Bienvenida a esta aventura jugador, cuando empieces a jugar debes ubicar tu flota que consta de 1 portaaviones, 2 submarinos,\n " +
             "3 destructores y 4 fratatas que vas a ubicar dando click en las celdas, empieza a dar click en el campo enemigo para intentar hundir la flota contraria.\n" +
             "Si dice un casillero que está vacío deberá decir \"agua\", si acierta dirá \"hundido\" y si acierta a algun barco completamente deberá decir \"hundido\". \n" +
             "Juega uno por vez, el que quede con los barcos a flote resultará ganador.";
 
-    private static final String GUIA_PORTAAVIONES = "Debes seleccionar 4 casillas del tablero, DEBEN estar seguidas,\n" +
-            " ya sea horizontal o verticalmente";
+    private static final String GUIA_COLORES = "Fragatas -> Naranja\n"+
+                                                "Submarinos-> Verde\n"+
+                                                "Destructores -> Rosado\n"+
+                                                "Magenta-> Purpura\n";
 
     private static final String GUIA_SUBMARINOS = "";
 
@@ -74,6 +78,10 @@ public class GUI extends JFrame {
         escuchaFragatas = new EscuchaFragatas();
         escuchaSubmarinos = new EscuchaSubmarinos();
         escuchaPortaavion = new EscuchaPortaavion();
+        escuchaEmpezarJuego = new EscuchaEmpezarJuego();
+        fragatasAnteriores = new ArrayList<Celda>();
+        destructoresAnteriores = new ArrayList<Celda>();
+        submarinosAnteriores = new ArrayList<Celda>();
         celdasDest01 = new ArrayList<Celda>();
         celdasDest02 = new ArrayList<Celda>();
         celdasDest03 = new ArrayList<Celda>();
@@ -133,7 +141,7 @@ public class GUI extends JFrame {
         panelBienvenido.add(jugar, constraints);
 
         empezarJuego = new JButton("Empezar juego");
-        //empezarJuego.addActionListener(escucha);
+        empezarJuego.addActionListener(escuchaEmpezarJuego);
         empezarJuego.setVisible(false);
         constraints.gridx=1;
         constraints.gridy=2;
@@ -189,17 +197,26 @@ public class GUI extends JFrame {
 
 
         tableroPosicion = new JPanel();
+        tableroPosicion.setBorder(BorderFactory.createTitledBorder("¡Tablero posicionl!"));
+        tableroPosicion.setPreferredSize(new Dimension(500,500));
         tableroPosicion.setLayout(new GridLayout(11,11));
-        tableroPosicion.setVisible(false);
-        this.add(tableroPosicion);
+        this.add(tableroPosicion, BorderLayout.WEST);
 
         tableroPrincipal= new JPanel();
         tableroPrincipal.setBorder(BorderFactory.createTitledBorder("¡Tablero principal!"));
         tableroPrincipal.setPreferredSize(new Dimension(500,500));
         tableroPrincipal.setLayout(new GridLayout(11,11));
-        this.add(tableroPrincipal);
+        //tableroPrincipal.setVisible(false);
+        this.add(tableroPrincipal, BorderLayout.EAST);
 
-
+        guiaColores = new JTextArea();
+        guiaColores.setEditable(false);
+        guiaColores.setVisible(false);
+        guiaColores.setText(GUIA_COLORES);
+        constraints.gridx=1;
+        constraints.gridy=3;
+        constraints.gridwidth = 3;
+        panelBienvenido.add(guiaColores, constraints);
 
         for(int i = 0; i < 10; i++){
 
@@ -209,7 +226,20 @@ public class GUI extends JFrame {
                 System.out.println(matrizCelda[i][j].columna);
                 System.out.println(matrizCelda[i][j].fila);
                 //matrizCelda[i][j].addActionListener(escucha);
-                tableroPrincipal.add(matrizCelda[i][j]);
+                tableroPosicion.add(matrizCelda[i][j]);
+            }
+        }
+
+        for(int i = 0; i < 10; i++){
+
+            for(int j = 0; j < 10; j++){
+                matrizCeldaRival[i][j] = new Celda(i,j);
+
+                System.out.println(matrizCeldaRival[i][j].columna);
+                System.out.println(matrizCeldaRival[i][j].fila);
+                //matrizCelda[i][j].addActionListener(escucha);
+                tableroPrincipal.add(matrizCeldaRival[i][j]);
+                matrizCeldaRival[i][j].cambiarFondo();
             }
         }
 
@@ -284,9 +314,7 @@ public class GUI extends JFrame {
 
                     for (int j = 0; j < 10; j++) {
                         matrizCelda[i][j].addActionListener(escuchaFragatas);
-                        /*matrizCelda[i][j].addActionListener(escuchaDestructores);
-                        matrizCelda[i][j].addActionListener(escuchaSubmarinos);
-                        matrizCelda[i][j].addActionListener(escuchaPortaavion);*/
+
                     }
                 }
                 JOptionPane.showMessageDialog(null,
@@ -307,33 +335,32 @@ public class GUI extends JFrame {
                 if (fragata01.getContador() == 1) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata01.getContador());
                     fragata01.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    fragatasAnteriores.add(celdaSeleccionada);
                     celdaSeleccionada.removeActionListener(escuchaFragatas);
-                    celdaSeleccionada.removeActionListener(escuchaDestructores);
-                    celdaSeleccionada.removeActionListener(escuchaSubmarinos);
+
                     //celdaSeleccionada.removeActionListener(escuchaPortaavion);
                     //System.out.println("fragata01Contador="+fragata01.getContador()+"");
                 } else if (fragata02.getContador() == 2) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata02.getContador());
                     fragata02.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    fragatasAnteriores.add(celdaSeleccionada);
                     celdaSeleccionada.removeActionListener(escuchaFragatas);
-                    celdaSeleccionada.removeActionListener(escuchaDestructores);
-                    celdaSeleccionada.removeActionListener(escuchaSubmarinos);
-                    //celdaSeleccionada.removeActionListener(escuchaPortaavion);
+
                     //System.out.println("fragata02Contador="+fragata02.getContador()+"");
                 } else if (fragata03.getContador() == 3) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata03.getContador());
                     fragata03.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    fragatasAnteriores.add(celdaSeleccionada);
                     celdaSeleccionada.removeActionListener(escuchaFragatas);
-                    celdaSeleccionada.removeActionListener(escuchaDestructores);
-                    celdaSeleccionada.removeActionListener(escuchaSubmarinos);
+
                     //celdaSeleccionada.removeActionListener(escuchaPortaavion);
                     //System.out.println("fragata03Contador="+fragata03.getContador()+"");
                 } else if (fragata04.getContador() == 4) {
                     modelBatalla.fragatas(fragatas, fila, columna, fragata04.getContador());
                     fragata04.setContador(0);celdaSeleccionada.setBackground(Color.ORANGE);
+                    fragatasAnteriores.add(celdaSeleccionada);
                     celdaSeleccionada.removeActionListener(escuchaFragatas);
-                    celdaSeleccionada.removeActionListener(escuchaDestructores);
-                    celdaSeleccionada.removeActionListener(escuchaSubmarinos);
+
                     //celdaSeleccionada.removeActionListener(escuchaPortaavion);
 
                     destructor01.setContador(1);
@@ -382,6 +409,8 @@ public class GUI extends JFrame {
 
                         for (int j = 0; j < 10; j++) {
                             matrizCelda[i][j].addActionListener(escuchaDestructores);
+                            modelBatalla.eliminarEscuchasAnteriores(matrizCelda,fragatasAnteriores,escuchaDestructores);
+
                         }
                     }
 
@@ -398,6 +427,7 @@ public class GUI extends JFrame {
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
 
                                 celdasDest01.add(celdaSeleccionada);
+                                destructoresAnteriores.add(celdaSeleccionada);
                                 celdaSeleccionada.removeActionListener(escuchaDestructores);
                                 System.out.println("celdasDest01="+celdasDest01.size()+"");
 
@@ -412,7 +442,8 @@ public class GUI extends JFrame {
                                 System.out.println("CASO 22222222222");
 
                                 celdasDest01.add(celdaSeleccionada);
-
+                                destructoresAnteriores.add(celdaSeleccionada);
+                                celdaSeleccionada.removeActionListener(escuchaDestructores);
 
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
                                 celdaSeleccionada.setBackground(Color.GREEN);
@@ -450,6 +481,7 @@ public class GUI extends JFrame {
                                 System.out.println("AQUI ESTOYYYYYYYYYYYYYYYYYYY");
 
                                 celdasDest02.add(celdaSeleccionada);
+                                destructoresAnteriores.add(celdaSeleccionada);
                                 celdaSeleccionada.removeActionListener(escuchaDestructores);
                                 System.out.println("celdasDest02="+celdasDest02.size()+"");
 
@@ -463,6 +495,8 @@ public class GUI extends JFrame {
                                 System.out.println("destructor01Contador=" + destructor01.getContador() + "");
 
                                 celdasDest02.add(celdaSeleccionada);
+                                destructoresAnteriores.add(celdaSeleccionada);
+                                celdaSeleccionada.removeActionListener(escuchaDestructores);
                                 System.out.println("celdasDest02="+celdasDest02.size()+"");
 
                                 System.out.println("SEBASSSSSSSSSSSSSSSSSSSSSSSS");
@@ -493,6 +527,7 @@ public class GUI extends JFrame {
                                 System.out.println("caso 5");
 
                                 celdasDest03.add(celdaSeleccionada);
+                                destructoresAnteriores.add(celdaSeleccionada);
                                 celdaSeleccionada.removeActionListener(escuchaDestructores);
                                 System.out.println("celdasDest03="+celdasDest03.size()+"");
 
@@ -508,6 +543,8 @@ public class GUI extends JFrame {
                                 System.out.println("caso 6");
 
                                 celdasDest03.add(celdaSeleccionada);
+                                destructoresAnteriores.add(celdaSeleccionada);
+                                celdaSeleccionada.removeActionListener(escuchaDestructores);
                                 System.out.println("celdasDest03="+celdasDest03.size()+"");
 
                                 modelBatalla.destructores(destructores, fila, columna, destructor01.getContador());
@@ -567,6 +604,9 @@ public class GUI extends JFrame {
 
                     for (int j = 0; j < 10; j++) {
                         matrizCelda[i][j].addActionListener(escuchaSubmarinos);
+                        modelBatalla.eliminarEscuchasAnteriores(matrizCelda,destructoresAnteriores,escuchaSubmarinos);
+                        modelBatalla.eliminarEscuchasAnteriores(matrizCelda,fragatasAnteriores,escuchaSubmarinos);
+
                     }
                 }
             }else{
@@ -584,6 +624,7 @@ public class GUI extends JFrame {
                         System.out.println("submarino01Contador=" + submarino01.getContador() + "");
 
                         celdasSub01.add(celdaSeleccionada);
+                        submarinosAnteriores.add(celdaSeleccionada);
                         celdaSeleccionada.removeActionListener(escuchaSubmarinos);
                         System.out.println("celdasSub01="+celdasSub01.size()+"");
 
@@ -597,6 +638,7 @@ public class GUI extends JFrame {
                         System.out.println("submarino01Contador=" + submarino01.getContador() + "");
 
                         celdasSub01.add(celdaSeleccionada);
+                        submarinosAnteriores.add(celdaSeleccionada);
                         celdaSeleccionada.removeActionListener(escuchaSubmarinos);
                         System.out.println("celdasSub01="+celdasSub01.size()+"");
 
@@ -611,6 +653,7 @@ public class GUI extends JFrame {
                         System.out.println("CASO 22222222222");
 
                         celdasSub01.add(celdaSeleccionada);
+                        submarinosAnteriores.add(celdaSeleccionada);
                         celdaSeleccionada.removeActionListener(escuchaSubmarinos);
                         System.out.println("celdasSub01="+celdasSub01.size()+"");
 
@@ -639,6 +682,7 @@ public class GUI extends JFrame {
                         System.out.println("submarino01Contador=" + submarino01.getContador() + "");
 
                         celdasSub02.add(celdaSeleccionada);
+                        submarinosAnteriores.add(celdaSeleccionada);
                         celdaSeleccionada.removeActionListener(escuchaSubmarinos);
                         System.out.println("celdasSub02="+celdasSub02.size()+"");
 
@@ -652,6 +696,7 @@ public class GUI extends JFrame {
                         System.out.println("submarino01Contador=" + submarino01.getContador() + "");
 
                         celdasSub02.add(celdaSeleccionada);
+                        submarinosAnteriores.add(celdaSeleccionada);
                         celdaSeleccionada.removeActionListener(escuchaSubmarinos);
                         System.out.println("celdasSub02="+celdasSub02.size()+"");
 
@@ -673,6 +718,7 @@ public class GUI extends JFrame {
                         System.out.println("SEBASSSSSSSSSSSSSSSSSSSSSSSS");
 
                         celdasSub02.add(celdaSeleccionada);
+                        submarinosAnteriores.add(celdaSeleccionada);
                         celdaSeleccionada.removeActionListener(escuchaSubmarinos);
 
                         modelBatalla.submarinos(submarinos, fila, columna, submarino01.getContador());
@@ -729,6 +775,10 @@ public class GUI extends JFrame {
 
                     for (int j = 0; j < 10; j++) {
                         matrizCelda[i][j].addActionListener(escuchaPortaavion);
+                        modelBatalla.eliminarEscuchasAnteriores(matrizCelda,destructoresAnteriores,escuchaPortaavion);
+                        modelBatalla.eliminarEscuchasAnteriores(matrizCelda,fragatasAnteriores,escuchaPortaavion);
+                        modelBatalla.eliminarEscuchasAnteriores(matrizCelda,submarinosAnteriores,escuchaPortaavion);
+
                     }
                 }
             }else {
@@ -767,11 +817,15 @@ public class GUI extends JFrame {
                         submarinosBtn.setVisible(false);
                         portaavionesBtn.setVisible(false);
                         empezarJuego.setVisible(true);
+                        guiaColores.setVisible(true);
+
+
 
 
                         JOptionPane.showMessageDialog(null,
                                 "1 portaavion seleccionado correctamente\n"+
-                                        "presiona el boton correspondiente de arriba",
+                                        "presiona el boton correspondiente de arriba\n"+
+                                "para EMPEZAR EL JUEGO",
 
                                 "PopUp Dialog",
                                 JOptionPane.INFORMATION_MESSAGE);
@@ -786,5 +840,37 @@ public class GUI extends JFrame {
 
 
     }
+
+    private class EscuchaEmpezarJuego implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource() == empezarJuego) {
+
+
+
+                for (int i = 0; i < 10; i++) {
+
+                    for (int j = 0; j < 10; j++) {
+                        matrizCeldaRival[i][j].restaurarFondo();
+                    }
+                }
+
+                JOptionPane.showMessageDialog(null,
+                        "Trata de derribar la flota rival para ganar el juego,\n"+
+                                "antes que nos derriben la nuestra\n"+
+                                "¡MUCHA SUERTE!",
+
+                        "PopUp Dialog",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
+        }
+
+
+    }
+
 }
 
