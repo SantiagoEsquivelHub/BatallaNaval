@@ -151,7 +151,7 @@ public class GUI extends JFrame {
 
         tableroAparte = new JButton("Tablero del rival");
         tableroAparte.addActionListener(escuchaEmpezarJuego);
-        //tableroAparte.setVisible(false);
+        tableroAparte.setVisible(false);
         constraints.gridx=2;
         constraints.gridy=2;
         constraints.gridwidth = 1;
@@ -305,8 +305,8 @@ public class GUI extends JFrame {
                 jugar.setVisible(false);
                 imagen.setVisible(false);
                 JOptionPane.showMessageDialog(null,
-                        "Selecciona el botón habilitado en la parte de arriba\n" +
-                                "DEBES SELECCIONAR DE IZQUIERDA -> DERECHA",
+                        "Selecciona el botón habilitado en la parte de arriba"
+                               ,
 
                         "PopUp Dialog",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -859,7 +859,7 @@ public class GUI extends JFrame {
                         empezarJuego.setVisible(true);
                         guiaColores.setVisible(true);
                         imagen.setVisible(true);
-                        //tableroAparte.setVisible(true);
+
 
 
                         JOptionPane.showMessageDialog(null,
@@ -887,7 +887,7 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == empezarJuego) {
-
+                tableroAparte.setVisible(true);
 
 
                 for (int i = 0; i < 10; i++) {
