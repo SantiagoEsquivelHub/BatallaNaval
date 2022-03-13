@@ -7,7 +7,7 @@ import java.awt.*;
 public class Celda extends JButton {
     int fila;
     int columna;
-    int estado ;
+    boolean estado;
 
     /**Estado 0 = Mar => color: Cyan
      * Estado 1 = Fragata => color: Red
@@ -16,11 +16,11 @@ public class Celda extends JButton {
      * Estado 4 = Portaavion => Color: Pink
      * */
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
@@ -29,6 +29,7 @@ public class Celda extends JButton {
         this.fila = fila;
         this.columna = columna;
         this.setBackground(Color.CYAN);
+        this.estado = false;
     }
 
     public int getColumna() {
