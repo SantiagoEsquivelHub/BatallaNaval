@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static java.awt.Color.*;
+
 /**
  * This class is used for ...
  * @autor Paola-J Rodriguez-C paola.rodriguez@correounivalle.edu.co
@@ -16,7 +18,6 @@ public class GUI extends JFrame {
 
     private Header headerProject;
     private Rival rival;
-    private JFrameSecundario jFrameSecundario;
     private Escucha escucha;
     private EscuchaDestructores escuchaDestructores;
     private EscuchaFragatas escuchaFragatas;
@@ -26,10 +27,10 @@ public class GUI extends JFrame {
     private ModelBatalla modelBatalla;
     private ImageIcon imagenBienvenida;
     private JLabel bienvenida, imagen;
-    private JPanel panelBienvenido, tableroPosicion, tableroPrincipal;
+    private JPanel panelBienvenido, tableroPosicion, tableroPrincipal, tableroAparte;
     private Celda[][] matrizCelda = new Celda[10][10];
     private Celda[][] matrizCeldaRival = new Celda[10][10];
-    private JButton guiaJuego, jugar, fragatasBtn, destructoresBtn, submarinosBtn, portaavionesBtn, empezarJuego, tableroAparte;
+    private JButton guiaJuego, jugar, fragatasBtn, destructoresBtn, submarinosBtn, portaavionesBtn, empezarJuego, tableroAparteBtn;
     private JTextArea guiaColores;
     private Barco fragata01, fragata02, fragata03, fragata04,submarino01,submarino02,portaavion01,destructor01, destructor02, destructor03,
     fragata01Rival, fragata02Rival, fragata03Rival, fragata04Rival,submarino01Rival,submarino02Rival,portaavion01Rival,destructor01Rival, destructor02Rival, destructor03Rival;
@@ -74,7 +75,6 @@ public class GUI extends JFrame {
         //Create Listener Object and Control Object
         escucha = new Escucha();
         rival = new Rival();
-        jFrameSecundario = new JFrameSecundario();
         escuchaDestructores = new EscuchaDestructores();
         escuchaFragatas = new EscuchaFragatas();
         escuchaSubmarinos = new EscuchaSubmarinos();
@@ -117,6 +117,10 @@ public class GUI extends JFrame {
         headerProject = new Header("Batalla Naval", Color.BLACK);
         this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
 
+        tableroAparte = new JPanel();
+        tableroAparte.setBorder(BorderFactory.createTitledBorder("¡Tablero del rival!"));
+        tableroAparte.setPreferredSize(new Dimension(500,500));
+        tableroAparte.setLayout(new GridLayout(11,11));
 
         panelBienvenido = new JPanel();
         panelBienvenido.setBorder(BorderFactory.createTitledBorder("¡Bienvenido!"));
@@ -149,13 +153,13 @@ public class GUI extends JFrame {
         constraints.gridwidth = 1;
         panelBienvenido.add(empezarJuego, constraints);
 
-        tableroAparte = new JButton("Tablero del rival");
-        tableroAparte.addActionListener(escuchaEmpezarJuego);
-        tableroAparte.setVisible(false);
+        tableroAparteBtn = new JButton("Tablero del rival");
+        tableroAparteBtn.addActionListener(escuchaEmpezarJuego);
+        //tableroAparte.setVisible(false);
         constraints.gridx=2;
         constraints.gridy=2;
         constraints.gridwidth = 1;
-        panelBienvenido.add(tableroAparte, constraints);
+        panelBienvenido.add(tableroAparteBtn, constraints);
 
         guiaJuego = new JButton("Guia de juego");
         guiaJuego.addActionListener(escucha);
@@ -243,14 +247,35 @@ public class GUI extends JFrame {
             for(int j = 0; j < 10; j++){
                 //matrizCeldaRival[i][j] = new Celda(i,j);
                 rival.getMatrizCeldaRival()[i][j] = new Celda(i,j);
-
+                //rival.getMatrizCeldaRivalAparte()[i][j] = new Celda(i,j);
                 //matrizCelda[i][j].addActionListener(escucha);
                 //tableroPrincipal.add(matrizCeldaRival[i][j]);
+                //tableroAparte.add(rival.getMatrizCeldaRivalAparte()[i][j]);
                 tableroPrincipal.add(rival.getMatrizCeldaRival()[i][j]);
+
+                //tableroAparte.add(rival.getMatrizCeldaRival()[i][j]);
                 //matrizCeldaRival[i][j].cambiarFondo();
                 rival.getMatrizCeldaRival()[i][j].cambiarFondo();
             }
         }
+
+
+
+        /*for(int i = 0; i < 10; i++){
+
+            for(int j = 0; j < 10; j++){
+                //matrizCeldaRival[i][j] = new Celda(i,j);
+                rival.getMatrizCeldaRival()[i][j] = new Celda(i,j);
+
+                //matrizCelda[i][j].addActionListener(escucha);
+                //tableroPrincipal.add(matrizCeldaRival[i][j]);
+                //tableroPrincipal.add(rival.getMatrizCeldaRival()[i][j]);
+
+                tableroAparte.add(rival.getMatrizCeldaRival()[i][j]);
+                //matrizCeldaRival[i][j].cambiarFondo();
+                //rival.getMatrizCeldaRival()[i][j].cambiarFondo();
+            }
+        }*/
 
 
     }
@@ -869,6 +894,15 @@ public class GUI extends JFrame {
 
                                 "PopUp Dialog",
                                 JOptionPane.INFORMATION_MESSAGE);
+
+                        for (int i = 0; i < 10; i++) {
+
+                            for (int j = 0; j < 10; j++) {
+                                matrizCelda[i][j].removeActionListener(escucha);
+                                matrizCelda[i][j].removeActionListener(escuchaPortaavion);
+                            }
+                        }
+
                     }else{
                         portaavion01.setContador(0);
                     }
@@ -887,7 +921,7 @@ public class GUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == empezarJuego) {
-                tableroAparte.setVisible(true);
+                //tableroAparte.setVisible(true);
 
 
                 for (int i = 0; i < 10; i++) {
@@ -908,9 +942,78 @@ public class GUI extends JFrame {
                         "PopUp Dialog",
                         JOptionPane.INFORMATION_MESSAGE);
 
-            }else if(e.getSource() == tableroAparte){
-            tableroAparte.setEnabled(false);
-                jFrameSecundario.abrirJframe();
+            }else if(e.getSource() == tableroAparteBtn){
+                tableroAparteBtn.setEnabled(false);
+
+
+
+
+                /*for(int i = 0; i < 10; i++){
+
+                    for(int j = 0; j < 10; j++){
+                        //matrizCeldaRival[i][j] = new Celda(i,j);
+                        rival.getMatrizCeldaRival()[i][j] = new Celda(i,j);
+
+                        //matrizCelda[i][j].addActionListener(escucha);
+                        //tableroPrincipal.add(matrizCeldaRival[i][j]);
+                        tableroPrincipal.add(rival.getMatrizCeldaRival()[i][j]);
+
+                        //matrizCeldaRival[i][j].cambiarFondo();
+                        rival.getMatrizCeldaRival()[i][j].cambiarFondo();
+                    }
+                }*/
+
+                Celda[][] matrizPostFragatas = modelBatalla.fragatasAleatorias(rival.getMatrizCeldaRival(), rival.getCeldasRival());
+                Celda[][] matrizPostFragatas2 = modelBatalla.fragatasAleatorias(matrizPostFragatas, rival.getCeldasRival());
+                Celda[][] matrizPostFragatas3 = modelBatalla.fragatasAleatorias(matrizPostFragatas2, rival.getCeldasRival());
+                Celda[][] matrizPostFragatas4 = modelBatalla.fragatasAleatorias(matrizPostFragatas3, rival.getCeldasRival());
+                Celda[][] matrizPostDestructores = modelBatalla.creacionDestructoresJuntos(matrizPostFragatas4,2, rival.getCeldasRival());
+                Celda[][] matrizPostDestructores2 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores,2, rival.getCeldasRival());
+                Celda[][] matrizPostDestructores3 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores2 ,2, rival.getCeldasRival());
+                Celda[][] matrizPostSubmarinos = modelBatalla.creacionSubmarinosJuntos(matrizPostDestructores3,3, rival.getCeldasRival());
+                Celda[][] matrizPostSubmarinos2 = modelBatalla.creacionSubmarinosJuntos(matrizPostSubmarinos,3, rival.getCeldasRival());
+                Celda[][] matrizCompletaRivalREAL  = modelBatalla.creacionPortaavionJunto(matrizPostSubmarinos2 ,4, rival.getCeldasRival());
+
+            System.out.println("sizeCelditas="+rival.getCeldasRival().size()+"");
+
+                for(int i = 0; i < 10; i++){
+
+                    for(int j = 0; j < 10; j++){
+                        //matrizCeldaRival[i][j] = new Celda(i,j);
+                        //rival.getMatrizCeldaRival()[i][j] = new Celda(i,j);
+                        rival.getMatrizCeldaRivalAparte()[i][j] = new Celda(i,j);
+                        //matrizCelda[i][j].addActionListener(escucha);
+                        //tableroPrincipal.add(matrizCeldaRival[i][j]);
+                        tableroAparte.add(rival.getMatrizCeldaRivalAparte()[i][j]);
+                        //tableroPrincipal.add(rival.getMatrizCeldaRival()[i][j]);
+
+                        //tableroAparte.add(rival.getMatrizCeldaRival()[i][j]);
+                        //matrizCeldaRival[i][j].cambiarFondo();
+                        //rival.getMatrizCeldaRival()[i][j].cambiarFondo();
+                    }
+                }
+
+                for(int i = 0; i < rival.getCeldasRival().size(); i++) {
+                    if(rival.getCeldasRival().get(i).getColor() != CYAN){
+
+                        int fila = rival.getCeldasRival().get(i).getFila();
+                        int columna = rival.getCeldasRival().get(i).getColumna();
+                        rival.getMatrizCeldaRivalAparte()[fila][columna].setBackground(rival.getCeldasRival().get(i).getColor());
+                        rival.getMatrizCeldaRivalAparte()[fila][columna].setColor(rival.getCeldasRival().get(i).getColor());
+                    }
+
+                }
+
+
+                JFrame frame = new JFrame();
+                frame.getContentPane().setBackground(getBackground());
+                frame.setLocationRelativeTo(null);
+                frame.setSize(500,500);
+                //this.pack();
+                frame.setTitle("Tablero del rival");
+                frame.add(tableroAparte);
+                frame.setVisible(true);
+            }
 
             }
 
@@ -924,5 +1027,6 @@ public class GUI extends JFrame {
 
     }
 
-}
+
+
 

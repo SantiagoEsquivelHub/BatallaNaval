@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static java.awt.Color.*;
+
 
 public class ModelBatalla {
 int error= 2;
@@ -194,10 +196,12 @@ Rival rival = new Rival();
             int columna = aleatorio.nextInt(9);
 
         if (matrizCeldaRival[fila][columna].getEstado() == false) {
+            matrizCeldaRival[fila][columna].setColor(ORANGE);
+            matrizCeldaRival[fila][columna].setBackground(ORANGE);
             matrizCeldaRival[fila][columna].setEstado(true);
             celdasRival.add(matrizCeldaRival[fila][columna]);
             //System.out.println("Filaaaa="+(fila+1)+" Columnaaaaaa="+(columna+1)+" Estado="+(matrizCeldaRival[fila][columna].getEstado())+"");
-            matrizCeldaRival[fila][columna].setBackground(Color.ORANGE);
+
             //System.out.println("SizeCeldasRival="+celdasRival.size()+"");
 
         }else{
@@ -211,7 +215,7 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionSubmarinosJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas) {
+    public Celda[][] creacionSubmarinosJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival) {
 
 
 
@@ -224,23 +228,35 @@ Rival rival = new Rival();
                     //System.out.println("FilaaaaSUB1="+(fila)+" ColumnaaaaaaSUB1="+(columna)+" EstadoSUB1="+(matrizCeldaRival[fila][columna].getEstado())+"");
                     matrizCeldaRival[fila][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna].setEstado(true);
+                    matrizCeldaRival[fila][columna].setColor(PINK);
                     matrizCeldaRival[fila][columna+1].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna+1].setEstado(true);
+                    matrizCeldaRival[fila][columna+1].setColor(PINK);
                     matrizCeldaRival[fila][columna+2].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna+2].setEstado(true);
+                    matrizCeldaRival[fila][columna+2].setColor(PINK);
+                    celdasRival.add(matrizCeldaRival[fila][columna]);
+                    celdasRival.add(matrizCeldaRival[fila][columna+1]);
+                    celdasRival.add(matrizCeldaRival[fila][columna+2]);
                     break;
                 } else if (!matrizCeldaRival[fila][columna].getEstado() && !matrizCeldaRival[fila+1][columna].getEstado() && !matrizCeldaRival[fila+2][columna].getEstado()) {
                     //System.out.println("FilaaaaSUB2="+(fila)+" ColumnaaaaaaSUB2="+(columna)+" EstadoSUB2="+(matrizCeldaRival[fila][columna].getEstado())+"");
                     matrizCeldaRival[fila][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna].setEstado(true);
+                    matrizCeldaRival[fila][columna].setColor(PINK);
                     matrizCeldaRival[fila+1][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila+1][columna].setEstado(true);
+                    matrizCeldaRival[fila+1][columna].setColor(PINK);
                     matrizCeldaRival[fila+2][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila+2][columna].setEstado(true);
+                    matrizCeldaRival[fila+2][columna].setColor(PINK);
+                    celdasRival.add(matrizCeldaRival[fila][columna]);
+                    celdasRival.add(matrizCeldaRival[fila+1][columna]);
+                    celdasRival.add(matrizCeldaRival[fila+1][columna]);
                     break;
                 }else{
                     //System.out.println("ERRORRRRRRRRRSUB");
-                    creacionSubmarinosJuntos(matrizCeldaRival,cantidadCeldasJuntas);
+                    creacionSubmarinosJuntos(matrizCeldaRival,cantidadCeldasJuntas, celdasRival);
                     break;
                 }
 
@@ -250,7 +266,7 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionDestructoresJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas) {
+    public Celda[][] creacionDestructoresJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival) {
 
 
 
@@ -263,19 +279,27 @@ Rival rival = new Rival();
                     //System.out.println("FilaaaaDES1="+(fila)+" ColumnaaaaaaDES1="+(columna)+" EstadoDES1="+(matrizCeldaRival[fila][columna].getEstado())+"");
                     matrizCeldaRival[fila][columna].setBackground(Color.GREEN);
                     matrizCeldaRival[fila][columna].setEstado(true);
+                    matrizCeldaRival[fila][columna].setColor(GREEN);
                     matrizCeldaRival[fila][columna+1].setBackground(Color.GREEN);
                     matrizCeldaRival[fila][columna+1].setEstado(true);
+                    matrizCeldaRival[fila][columna+1].setColor(GREEN);
+                    celdasRival.add(matrizCeldaRival[fila][columna]);
+                    celdasRival.add(matrizCeldaRival[fila][columna+1]);
                     break;
                 } else if (!matrizCeldaRival[fila][columna].getEstado() && !matrizCeldaRival[fila+1][columna].getEstado()) {
                     //System.out.println("FilaaaaDES2="+(fila)+" ColumnaaaaaaSUB1="+(columna)+" EstadoDES2="+(matrizCeldaRival[fila][columna].getEstado())+"");
                     matrizCeldaRival[fila][columna].setBackground(Color.GREEN);
                     matrizCeldaRival[fila][columna].setEstado(true);
+                    matrizCeldaRival[fila][columna].setColor(GREEN);
                     matrizCeldaRival[fila+1][columna].setBackground(Color.GREEN);
                     matrizCeldaRival[fila+1][columna].setEstado(true);
+                    matrizCeldaRival[fila+1][columna].setColor(GREEN);
+                    celdasRival.add(matrizCeldaRival[fila][columna]);
+                    celdasRival.add(matrizCeldaRival[fila+1][columna]);
                     break;
                 }else{
                     //System.out.println("ERRORRRRRRRRRDESC");
-                    creacionDestructoresJuntos(matrizCeldaRival,cantidadCeldasJuntas);
+                    creacionDestructoresJuntos(matrizCeldaRival,cantidadCeldasJuntas,celdasRival);
                     break;
 
                 }
@@ -286,7 +310,7 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionPortaavionJunto(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas) {
+    public Celda[][] creacionPortaavionJunto(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas,  ArrayList<Celda> celdasRival) {
 
 
 
@@ -298,26 +322,42 @@ Rival rival = new Rival();
             if (!matrizCeldaRival[fila][columna].getEstado() && !matrizCeldaRival[fila][columna+1].getEstado() && !matrizCeldaRival[fila][columna+2].getEstado() && !matrizCeldaRival[fila][columna+3].getEstado()) {
                 matrizCeldaRival[fila][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna].setEstado(true);
+                matrizCeldaRival[fila][columna].setColor(MAGENTA);
                 matrizCeldaRival[fila][columna + 1].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna + 1].setEstado(true);
+                matrizCeldaRival[fila][columna + 1].setColor(MAGENTA);
                 matrizCeldaRival[fila][columna + 2].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna + 2].setEstado(true);
+                matrizCeldaRival[fila][columna + 2].setColor(MAGENTA);
                 matrizCeldaRival[fila][columna + 3].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna + 3].setEstado(true);
+                matrizCeldaRival[fila][columna + 3].setColor(MAGENTA);
+                celdasRival.add(matrizCeldaRival[fila][columna]);
+                celdasRival.add(matrizCeldaRival[fila][columna+1]);
+                celdasRival.add(matrizCeldaRival[fila][columna+2]);
+                celdasRival.add(matrizCeldaRival[fila][columna+3]);
                 break;
             } else if(!matrizCeldaRival[fila][columna].getEstado() && !matrizCeldaRival[fila+1][columna].getEstado() && !matrizCeldaRival[fila+2][columna].getEstado() && !matrizCeldaRival[fila+3][columna].getEstado()){
                 matrizCeldaRival[fila][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna].setEstado(true);
+                matrizCeldaRival[fila][columna].setColor(MAGENTA);
                 matrizCeldaRival[fila + 1][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila + 1][columna].setEstado(true);
+                matrizCeldaRival[fila + 1][columna].setColor(MAGENTA);
                 matrizCeldaRival[fila + 2][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila + 2][columna].setEstado(true);
+                matrizCeldaRival[fila + 2][columna].setColor(MAGENTA);
                 matrizCeldaRival[fila + 3][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila + 3][columna].setEstado(true);
+                matrizCeldaRival[fila + 3][columna].setColor(MAGENTA);
+                celdasRival.add(matrizCeldaRival[fila][columna]);
+                celdasRival.add(matrizCeldaRival[fila+1][columna]);
+                celdasRival.add(matrizCeldaRival[fila+2][columna]);
+                celdasRival.add(matrizCeldaRival[fila+3][columna]);
                 break;
             }else{
                 //System.out.println("ERRORRRRRRRRR");
-                creacionPortaavionJunto(matrizCeldaRival,cantidadCeldasJuntas);
+                creacionPortaavionJunto(matrizCeldaRival,cantidadCeldasJuntas, celdasRival);
                 break;
             }
 
@@ -326,6 +366,20 @@ Rival rival = new Rival();
         return matrizCeldaRival;
 
     }
+
+public Celda[][] matrizJuego(Celda[][] matriz, JPanel tablero){
+    for(int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+
+            /*matriz[i][j].setColor(matriz[i][j].getColor());
+            matriz[i][j].setBackground(matriz[i][j].getColor());
+            System.out.println(matriz[i][j].getColor());*/
+            //rival.getMatrizCeldaRival()[i][j].setBackground(rival.getMatrizCeldaRival()[i][j].getColor());
+            tablero.add(matriz[i][j]);
+        }
+    }
+    return matriz;
+}
 
     }
 

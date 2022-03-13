@@ -7,20 +7,28 @@ import java.util.Random;
 public class Rival {
 
     private ArrayList<Celda> celdasRival = new ArrayList<Celda>();
+    private Celda[][] matrizCeldaRivalAparte = new Celda[10][10];
     private Celda[][] matrizCeldaRival = new Celda[10][10];
     private ArrayList<Integer> filasDest01Rival = new ArrayList<Integer>();
     private ArrayList<Integer> columnasDest01Rival= new ArrayList<Integer>();
     private ArrayList<Celda> celdasDest01Rival = new ArrayList<Celda>();
 
+
     public ArrayList<Celda> getCeldasRival() {
         return celdasRival;
     }
+
 
     public void setCeldasRival(ArrayList<Celda> celdasRival) {
         this.celdasRival = celdasRival;
     }
 
     public Celda[][] getMatrizCeldaRival() {
+
+        return matrizCeldaRival;
+    }
+
+    public Celda[][] getMatrizCeldaRivalAparte() {
 
         return matrizCeldaRival;
     }
@@ -73,4 +81,5 @@ public class Rival {
             filasDest01Rival.add(arrayCeldas.get(i).getFila()+1);
         }
     }
+
 }
