@@ -24,14 +24,14 @@ public class GUI extends JFrame {
     private EscuchaSubmarinos escuchaSubmarinos;
     private EscuchaPortaavion escuchaPortaavion;
     private EscuchaEmpezarJuego escuchaEmpezarJuego;
+    private EscuchaCeldasEnemigas escuchaCeldasEnemigas;
     private ModelBatalla modelBatalla;
-    private ImageIcon imagenBienvenida;
-    private JLabel bienvenida, imagen;
+    private ImageIcon imagenBienvenida, imagenColores;
+    private JLabel bienvenida, imagen, guiaColores;
     private JPanel panelBienvenido, tableroPosicion, tableroPrincipal, tableroAparte;
     private Celda[][] matrizCelda = new Celda[10][10];
     private Celda[][] matrizCeldaRival = new Celda[10][10];
-    private JButton guiaJuego, jugar, fragatasBtn, destructoresBtn, submarinosBtn, portaavionesBtn, empezarJuego, tableroAparteBtn;
-    private JTextArea guiaColores;
+    private JButton guiaJuego, jugar, fragatasBtn, destructoresBtn, submarinosBtn, portaavionesBtn, empezarJuego, tableroAparteBtn, ponerEscuchas;
     private Barco fragata01, fragata02, fragata03, fragata04,submarino01,submarino02,portaavion01,destructor01, destructor02, destructor03,
     fragata01Rival, fragata02Rival, fragata03Rival, fragata04Rival,submarino01Rival,submarino02Rival,portaavion01Rival,destructor01Rival, destructor02Rival, destructor03Rival;
     private ArrayList<Barco> fragatas, destructores, submarinos;
@@ -80,6 +80,7 @@ public class GUI extends JFrame {
         escuchaSubmarinos = new EscuchaSubmarinos();
         escuchaPortaavion = new EscuchaPortaavion();
         escuchaEmpezarJuego = new EscuchaEmpezarJuego();
+        escuchaCeldasEnemigas = new EscuchaCeldasEnemigas();
         fragatasAnteriores = new ArrayList<Celda>();
         destructoresAnteriores = new ArrayList<Celda>();
         submarinosAnteriores = new ArrayList<Celda>();
@@ -161,6 +162,14 @@ public class GUI extends JFrame {
         constraints.gridwidth = 1;
         panelBienvenido.add(tableroAparteBtn, constraints);
 
+        ponerEscuchas = new JButton("Poner escuchas");
+        ponerEscuchas.setVisible(false);
+        ponerEscuchas.addActionListener(escuchaCeldasEnemigas);
+        constraints.gridx=3;
+        constraints.gridy=2;
+        constraints.gridwidth = 1;
+        panelBienvenido.add(ponerEscuchas, constraints);
+
         guiaJuego = new JButton("Guia de juego");
         guiaJuego.addActionListener(escucha);
         constraints.gridx=1;
@@ -201,7 +210,7 @@ public class GUI extends JFrame {
         panelBienvenido.add(portaavionesBtn, constraints);
 
         imagen = new JLabel();
-        imagenBienvenida = new ImageIcon(getClass().getResource("/recursos/guia.jpeg"));
+        imagenBienvenida = new ImageIcon(getClass().getResource("/recursos/guia.PNG"));
         imagen.setIcon(imagenBienvenida);
         imagen.setVisible(false);
         constraints.gridx=2;
@@ -223,10 +232,10 @@ public class GUI extends JFrame {
         //tableroPrincipal.setVisible(false);
         this.add(tableroPrincipal, BorderLayout.EAST);
 
-        guiaColores = new JTextArea();
-        guiaColores.setEditable(false);
+        guiaColores = new JLabel();
+        imagenColores = new ImageIcon(getClass().getResource("/recursos/intro.png"));
+        guiaColores.setIcon(imagenColores);
         guiaColores.setVisible(false);
-        guiaColores.setText(GUIA_COLORES);
         constraints.gridx=1;
         constraints.gridy=3;
         constraints.gridwidth = 3;
@@ -261,23 +270,6 @@ public class GUI extends JFrame {
 
 
 
-        /*for(int i = 0; i < 10; i++){
-
-            for(int j = 0; j < 10; j++){
-                //matrizCeldaRival[i][j] = new Celda(i,j);
-                rival.getMatrizCeldaRival()[i][j] = new Celda(i,j);
-
-                //matrizCelda[i][j].addActionListener(escucha);
-                //tableroPrincipal.add(matrizCeldaRival[i][j]);
-                //tableroPrincipal.add(rival.getMatrizCeldaRival()[i][j]);
-
-                tableroAparte.add(rival.getMatrizCeldaRival()[i][j]);
-                //matrizCeldaRival[i][j].cambiarFondo();
-                //rival.getMatrizCeldaRival()[i][j].cambiarFondo();
-            }
-        }*/
-
-
     }
 
     /**
@@ -302,22 +294,12 @@ public class GUI extends JFrame {
 
             if (e.getSource() == guiaJuego) {
 
-               /* Celda[][] matrizPostFragatas = modelBatalla.fragatasAleatorias(rival.getMatrizCeldaRival(), rival.getCeldasRival());
-                Celda[][] matrizPostFragatas2 = modelBatalla.fragatasAleatorias(matrizPostFragatas, rival.getCeldasRival());
-                Celda[][] matrizPostFragatas3 = modelBatalla.fragatasAleatorias(matrizPostFragatas2, rival.getCeldasRival());
-                Celda[][] matrizPostFragatas4 = modelBatalla.fragatasAleatorias(matrizPostFragatas3, rival.getCeldasRival());
-                Celda[][] matrizPostDestructores = modelBatalla.creacionDestructoresJuntos(matrizPostFragatas4,2);
-                Celda[][] matrizPostDestructores2 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores,2);
-                Celda[][] matrizPostDestructores3 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores2 ,2);
-                Celda[][] matrizPostSubmarinos = modelBatalla.creacionSubmarinosJuntos(matrizPostDestructores3,3);
-                Celda[][] matrizPostSubmarinos2 = modelBatalla.creacionSubmarinosJuntos(matrizPostSubmarinos,3);
-                modelBatalla.creacionPortaavionJunto(matrizPostSubmarinos2 ,4);*/
-
                JOptionPane.showMessageDialog(null,
                         MENSAJE_GUIA,
 
                         "PopUp Dialog",
                         JOptionPane.INFORMATION_MESSAGE);
+
             } else if (e.getSource() == jugar) {
 
                 fragatasBtn.setVisible(true);
@@ -915,10 +897,88 @@ public class GUI extends JFrame {
 
     }
 
+    /*private class EscuchaCeldasEnemigas implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource() == ponerEscuchas) {
+
+               /* for (int i = 0; i < 10; i++) {
+
+                    for (int j = 0; j < 10; j++) {
+
+                        rival.getMatrizCeldaRival()[i][j].restaurarFondo();
+                    }
+                }
+
+
+
+
+                JOptionPane.showMessageDialog(null,
+                        "Trata de derribar la flota rival para ganar el juego,\n" +
+                                "antes que nos derriben la nuestra\n" +
+                                "¡MUCHA SUERTE!",
+
+                        "PopUp Dialog",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+                Celda celdaSeleccionada1 = (Celda) e.getSource();
+
+
+
+                if(celdaSeleccionada1.getEstado()){
+
+                    for(int i = 0; i < rival.getFragatasRival().size(); i++){
+                        if(celdaSeleccionada1 ==rival.getFragatasRival().get(i) && rival.getFragatasRival().get(i).getEstado()){
+                            celdaSeleccionada1.setBackground(red);
+                            break;
+                        }
+
+                    }
+
+                        System.out.println("SIZEEE="+rival.getFragatasRival().size()+"");
+                        celdaSeleccionada1.setBackground(BLACK);
+                        rival.setContadorPerder();
+                        System.out.println("CONTADORGANAR="+rival.getContadorPerder()+"");
+
+
+
+                }else{
+
+                    celdaSeleccionada1.setBackground(BLUE);
+                    celdaSeleccionada1.removeActionListener(escuchaCeldasEnemigas);
+                }
+
+                if(rival.getContadorPerder() == 20){
+                    JOptionPane.showMessageDialog(null,
+
+                            "¡GANASTE!",
+
+                            "PopUp Dialog",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+                }
+
+            }
+
+
+        }
+    }*/
+
+
     private class EscuchaEmpezarJuego implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            for(int i = 0; i < 10; i++){
+
+                for(int j = 0; j < 10; j++){
+                    //matrizCelda[i][j].addActionListener(escucha);
+                    rival.getMatrizCeldaRival()[i][j].addActionListener(escuchaCeldasEnemigas);
+                }
+            }
 
             if (e.getSource() == empezarJuego) {
                 //tableroAparte.setVisible(true);
@@ -963,18 +1023,26 @@ public class GUI extends JFrame {
                     }
                 }*/
 
-                Celda[][] matrizPostFragatas = modelBatalla.fragatasAleatorias(rival.getMatrizCeldaRival(), rival.getCeldasRival());
-                Celda[][] matrizPostFragatas2 = modelBatalla.fragatasAleatorias(matrizPostFragatas, rival.getCeldasRival());
-                Celda[][] matrizPostFragatas3 = modelBatalla.fragatasAleatorias(matrizPostFragatas2, rival.getCeldasRival());
-                Celda[][] matrizPostFragatas4 = modelBatalla.fragatasAleatorias(matrizPostFragatas3, rival.getCeldasRival());
-                Celda[][] matrizPostDestructores = modelBatalla.creacionDestructoresJuntos(matrizPostFragatas4,2, rival.getCeldasRival());
-                Celda[][] matrizPostDestructores2 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores,2, rival.getCeldasRival());
-                Celda[][] matrizPostDestructores3 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores2 ,2, rival.getCeldasRival());
-                Celda[][] matrizPostSubmarinos = modelBatalla.creacionSubmarinosJuntos(matrizPostDestructores3,3, rival.getCeldasRival());
-                Celda[][] matrizPostSubmarinos2 = modelBatalla.creacionSubmarinosJuntos(matrizPostSubmarinos,3, rival.getCeldasRival());
-                Celda[][] matrizCompletaRivalREAL  = modelBatalla.creacionPortaavionJunto(matrizPostSubmarinos2 ,4, rival.getCeldasRival());
+                Celda[][] matrizPostFragatas = modelBatalla.fragatasAleatorias(rival.getMatrizCeldaRival(), rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostFragatas2 = modelBatalla.fragatasAleatorias(matrizPostFragatas, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostFragatas3 = modelBatalla.fragatasAleatorias(matrizPostFragatas2, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostFragatas4 = modelBatalla.fragatasAleatorias(matrizPostFragatas3, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostDestructores = modelBatalla.creacionDestructoresJuntos(matrizPostFragatas4,2, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostDestructores2 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores,2, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostDestructores3 = modelBatalla.creacionDestructoresJuntos(matrizPostDestructores2 ,2, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostSubmarinos = modelBatalla.creacionSubmarinosJuntos(matrizPostDestructores3,3, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizPostSubmarinos2 = modelBatalla.creacionSubmarinosJuntos(matrizPostSubmarinos,3, rival.getCeldasRival(), escuchaCeldasEnemigas);
+                Celda[][] matrizCompletaRivalREAL  = modelBatalla.creacionPortaavionJunto(matrizPostSubmarinos2 ,4, rival.getCeldasRival(), escuchaCeldasEnemigas);
 
             System.out.println("sizeCelditas="+rival.getCeldasRival().size()+"");
+
+                for (int i = 0; i < 10; i++) {
+
+                    for (int j = 0; j < 10; j++) {
+                        //matrizCeldaRival[i][j].restaurarFondo();
+                        rival.getMatrizCeldaRival()[i][j].restaurarFondo();
+                    }
+                }
 
                 for(int i = 0; i < 10; i++){
 
@@ -994,15 +1062,22 @@ public class GUI extends JFrame {
                 }
 
                 for(int i = 0; i < rival.getCeldasRival().size(); i++) {
+
                     if(rival.getCeldasRival().get(i).getColor() != CYAN){
 
                         int fila = rival.getCeldasRival().get(i).getFila();
                         int columna = rival.getCeldasRival().get(i).getColumna();
+
+                        System.out.println("intento"+i+"");
                         rival.getMatrizCeldaRivalAparte()[fila][columna].setBackground(rival.getCeldasRival().get(i).getColor());
                         rival.getMatrizCeldaRivalAparte()[fila][columna].setColor(rival.getCeldasRival().get(i).getColor());
+
                     }
 
                 }
+
+
+
 
 
                 JFrame frame = new JFrame();
@@ -1023,6 +1098,137 @@ public class GUI extends JFrame {
 
 
         }
+
+
+    private class EscuchaCeldasEnemigas implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource() == ponerEscuchas) {
+
+               /* for (int i = 0; i < 10; i++) {
+
+                    for (int j = 0; j < 10; j++) {
+
+                        rival.getMatrizCeldaRival()[i][j].restaurarFondo();
+                    }
+                }*/
+
+
+
+
+                JOptionPane.showMessageDialog(null,
+                        "Trata de derribar la flota rival para ganar el juego,\n" +
+                                "antes que nos derriben la nuestra\n" +
+                                "¡MUCHA SUERTE!",
+
+                        "PopUp Dialog",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+                Celda celdaSeleccionada1 = (Celda) e.getSource();
+
+
+
+                if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isFragata()){
+
+                    celdaSeleccionada1.setBackground(RED);
+                    rival.setContadorPerder();
+
+                }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isDestructor()){
+
+
+                    celdaSeleccionada1.setGolpes();
+                    rival.getDestructoresRivalAux().add(celdaSeleccionada1);
+                    celdaSeleccionada1.setBackground(BLACK);
+                    rival.setContadorPerder();
+                    System.out.println(rival.getDestructoresRivalAux().size());
+
+                    if(rival.getDestructoresRivalAux().size() == 2){
+                        if(rival.getDestructoresRivalAux().get(0).getGolpes() == 1 && rival.getDestructoresRivalAux().get(1).getGolpes() == 1){
+
+
+                            rival.getDestructoresRivalAux().get(0).setBackground(RED);
+                            rival.getDestructoresRivalAux().get(1).setBackground(RED);
+                            rival.getDestructoresRivalAux().clear();
+
+                        }
+                    }
+
+                }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isSubmarino()){
+
+
+                    celdaSeleccionada1.setGolpes();
+                    rival.getDestructoresRivalAux().add(celdaSeleccionada1);
+                    celdaSeleccionada1.setBackground(BLACK);
+                    rival.setContadorPerder();
+                    System.out.println(rival.getDestructoresRivalAux().size());
+
+                    if(rival.getDestructoresRivalAux().size() == 3){
+                        if(rival.getDestructoresRivalAux().get(0).getGolpes() == 1 && rival.getDestructoresRivalAux().get(1).getGolpes() == 1 && rival.getDestructoresRivalAux().get(2).getGolpes() == 1){
+
+
+                            rival.getDestructoresRivalAux().get(0).setBackground(RED);
+                            rival.getDestructoresRivalAux().get(1).setBackground(RED);
+                            rival.getDestructoresRivalAux().get(2).setBackground(RED);
+                            rival.getDestructoresRivalAux().clear();
+
+                        }
+                    }
+
+                }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isPortaavion()){
+
+
+                    celdaSeleccionada1.setGolpes();
+                    rival.getDestructoresRivalAux().add(celdaSeleccionada1);
+                    celdaSeleccionada1.setBackground(BLACK);
+                    rival.setContadorPerder();
+                    System.out.println(rival.getDestructoresRivalAux().size());
+
+                    if(rival.getDestructoresRivalAux().size() == 4){
+                        if(rival.getDestructoresRivalAux().get(0).getGolpes() == 1 && rival.getDestructoresRivalAux().get(1).getGolpes() == 1 && rival.getDestructoresRivalAux().get(2).getGolpes() == 1 && rival.getDestructoresRivalAux().get(3).getGolpes() == 1){
+
+
+                            rival.getDestructoresRivalAux().get(0).setBackground(RED);
+                            rival.getDestructoresRivalAux().get(1).setBackground(RED);
+                            rival.getDestructoresRivalAux().get(2).setBackground(RED);
+                            rival.getDestructoresRivalAux().get(3).setBackground(RED);
+                            rival.getDestructoresRivalAux().clear();
+
+                        }
+                    }
+
+                }else if(celdaSeleccionada1.getEstado()){
+
+                    System.out.println("SIZEEE="+rival.getFragatasRival().size()+"");
+                    //celdaSeleccionada1.setBackground(BLACK);
+                    rival.setContadorPerder();
+                    System.out.println("CONTADORGANAR="+rival.getContadorPerder()+"");
+
+                }else{
+
+                    celdaSeleccionada1.setBackground(BLUE);
+                    celdaSeleccionada1.removeActionListener(escuchaCeldasEnemigas);
+                }
+
+                if(rival.getContadorPerder() == 20){
+                    JOptionPane.showMessageDialog(null,
+
+                            "¡GANASTE!",
+
+                            "PopUp Dialog",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+                }
+
+            }
+
+
+        }
+    }
+
+
 
 
     }

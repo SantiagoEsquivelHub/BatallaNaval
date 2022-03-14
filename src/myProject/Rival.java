@@ -5,6 +5,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Rival {
+    private int contadorGanar = 0;
+    private int contadorPerder = 0;
+    private int contadorDestructores = 0;
+
+    public int getContadorDestructores() {
+        return contadorDestructores;
+    }
+
+    public void setContadorDestructores() {
+        this.contadorDestructores = contadorDestructores+1;
+    }
 
     private ArrayList<Celda> celdasRival = new ArrayList<Celda>();
     private Celda[][] matrizCeldaRivalAparte = new Celda[10][10];
@@ -12,7 +23,59 @@ public class Rival {
     private ArrayList<Integer> filasDest01Rival = new ArrayList<Integer>();
     private ArrayList<Integer> columnasDest01Rival= new ArrayList<Integer>();
     private ArrayList<Celda> celdasDest01Rival = new ArrayList<Celda>();
+    private ArrayList<Celda> fragatasRival = new ArrayList<Celda>();
+    private ArrayList<Celda> destructores01Rival = new ArrayList<Celda>();
+    private ArrayList<Celda> destructores02Rival = new ArrayList<Celda>();
+    private ArrayList<Celda> destructores03Rival = new ArrayList<Celda>();
+    private ArrayList<Celda> destructoresRivalAux = new ArrayList<Celda>();
 
+    public ArrayList<Celda> getDestructoresRivalAux() {
+        return destructoresRivalAux;
+    }
+
+    public void setDestructoresRivalAux(ArrayList<Celda> destructoresRivalAux) {
+        this.destructoresRivalAux = destructoresRivalAux;
+    }
+
+    public ArrayList<Celda> getDestructores01Rival() {
+        return destructores01Rival;
+    }
+
+    public void setDestructores01Rival(ArrayList<Celda> destructores01Rival) {
+        this.destructores01Rival = destructores01Rival;
+    }
+
+    public ArrayList<Celda> getDestructores02Rival() {
+        return destructores02Rival;
+    }
+
+    public void setDestructores02Rival(ArrayList<Celda> destructores02Rival) {
+        this.destructores02Rival = destructores02Rival;
+    }
+
+    public ArrayList<Celda> getDestructores03Rival() {
+        return destructores03Rival;
+    }
+
+    public void setDestructores03Rival(ArrayList<Celda> destructores03Rival) {
+        this.destructores03Rival = destructores03Rival;
+    }
+
+    public ArrayList<Celda> getFragatasRival() {
+        return fragatasRival;
+    }
+
+    public void setFragatasRival(ArrayList<Celda> fragatasRival) {
+        this.fragatasRival = fragatasRival;
+    }
+
+    public int getContadorPerder() {
+        return contadorPerder;
+    }
+
+    public void setContadorPerder() {
+        this.contadorPerder = contadorPerder+1;
+    }
 
     public ArrayList<Celda> getCeldasRival() {
         return celdasRival;

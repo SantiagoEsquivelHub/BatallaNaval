@@ -9,6 +9,27 @@ public class Celda extends JButton {
     int columna;
     boolean estado;
     Color color;
+    boolean fragata;
+    boolean destructor;
+    boolean submarino;
+    boolean portaavion;
+    int golpes;
+
+    public boolean isSubmarino() {
+        return submarino;
+    }
+
+    public void setSubmarino(boolean submarino) {
+        this.submarino = submarino;
+    }
+
+    public boolean isPortaavion() {
+        return portaavion;
+    }
+
+    public void setPortaavion(boolean portaavion) {
+        this.portaavion = portaavion;
+    }
 
     public Color getColor() {
         return color;
@@ -16,6 +37,14 @@ public class Celda extends JButton {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public boolean isFragata() {
+        return fragata;
+    }
+
+    public void setFragata(boolean fragata) {
+        this.fragata = fragata;
     }
 
     /**Estado 0 = Mar => color: Cyan
@@ -29,6 +58,22 @@ public class Celda extends JButton {
         return estado;
     }
 
+    public boolean isDestructor() {
+        return destructor;
+    }
+
+    public void setDestructor(boolean destructor) {
+        this.destructor = destructor;
+    }
+
+    public int getGolpes() {
+        return golpes;
+    }
+
+    public void setGolpes() {
+        this.golpes = golpes+1;
+    }
+
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
@@ -40,6 +85,11 @@ public class Celda extends JButton {
         this.estado = false;
         this.color = Color.CYAN;
         this.setBackground(color);
+        this.fragata = false;
+        this.destructor = false;
+        this.submarino = false;
+        this.portaavion = false;
+        this.golpes = 0;
     }
 
     public int getColumna() {

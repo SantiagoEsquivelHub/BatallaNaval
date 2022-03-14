@@ -189,7 +189,7 @@ Rival rival = new Rival();
 
 
 
-    public Celda[][]  fragatasAleatorias(Celda[][] matrizCeldaRival, ArrayList<Celda> celdasRival) {
+    public Celda[][]  fragatasAleatorias(Celda[][] matrizCeldaRival, ArrayList<Celda> celdasRival, ActionListener escucha) {
 
             Random aleatorio = new Random();
             int fila = aleatorio.nextInt(9);
@@ -199,6 +199,8 @@ Rival rival = new Rival();
             matrizCeldaRival[fila][columna].setColor(ORANGE);
             matrizCeldaRival[fila][columna].setBackground(ORANGE);
             matrizCeldaRival[fila][columna].setEstado(true);
+            //matrizCeldaRival[fila][columna].addActionListener(escucha);
+            matrizCeldaRival[fila][columna].setFragata(true);
             celdasRival.add(matrizCeldaRival[fila][columna]);
             //System.out.println("Filaaaa="+(fila+1)+" Columnaaaaaa="+(columna+1)+" Estado="+(matrizCeldaRival[fila][columna].getEstado())+"");
 
@@ -206,7 +208,7 @@ Rival rival = new Rival();
 
         }else{
             //System.out.println("ERRORRRRRRRRRSUB");
-            fragatasAleatorias(matrizCeldaRival, celdasRival);
+            fragatasAleatorias(matrizCeldaRival, celdasRival, escucha);
 
         }
 
@@ -215,7 +217,7 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionSubmarinosJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival) {
+    public Celda[][] creacionSubmarinosJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival, ActionListener escucha) {
 
 
 
@@ -229,12 +231,18 @@ Rival rival = new Rival();
                     matrizCeldaRival[fila][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna].setEstado(true);
                     matrizCeldaRival[fila][columna].setColor(PINK);
+                    matrizCeldaRival[fila][columna].setSubmarino(true);
+                    //matrizCeldaRival[fila][columna].addActionListener(escucha);
                     matrizCeldaRival[fila][columna+1].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna+1].setEstado(true);
                     matrizCeldaRival[fila][columna+1].setColor(PINK);
+                    matrizCeldaRival[fila][columna+1].setSubmarino(true);
+                    //matrizCeldaRival[fila][columna+1].addActionListener(escucha);
                     matrizCeldaRival[fila][columna+2].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna+2].setEstado(true);
                     matrizCeldaRival[fila][columna+2].setColor(PINK);
+                    matrizCeldaRival[fila][columna+2].setSubmarino(true);
+                    //matrizCeldaRival[fila][columna+2].addActionListener(escucha);
                     celdasRival.add(matrizCeldaRival[fila][columna]);
                     celdasRival.add(matrizCeldaRival[fila][columna+1]);
                     celdasRival.add(matrizCeldaRival[fila][columna+2]);
@@ -244,19 +252,25 @@ Rival rival = new Rival();
                     matrizCeldaRival[fila][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila][columna].setEstado(true);
                     matrizCeldaRival[fila][columna].setColor(PINK);
+                    matrizCeldaRival[fila][columna].setSubmarino(true);
+                    //matrizCeldaRival[fila][columna].addActionListener(escucha);
                     matrizCeldaRival[fila+1][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila+1][columna].setEstado(true);
                     matrizCeldaRival[fila+1][columna].setColor(PINK);
+                    matrizCeldaRival[fila+1][columna].setSubmarino(true);
+                    //matrizCeldaRival[fila+1][columna].addActionListener(escucha);
                     matrizCeldaRival[fila+2][columna].setBackground(Color.PINK);
                     matrizCeldaRival[fila+2][columna].setEstado(true);
                     matrizCeldaRival[fila+2][columna].setColor(PINK);
+                    matrizCeldaRival[fila+2][columna].setSubmarino(true);
+                    //matrizCeldaRival[fila+2][columna].addActionListener(escucha);
                     celdasRival.add(matrizCeldaRival[fila][columna]);
                     celdasRival.add(matrizCeldaRival[fila+1][columna]);
-                    celdasRival.add(matrizCeldaRival[fila+1][columna]);
+                    celdasRival.add(matrizCeldaRival[fila+2][columna]);
                     break;
                 }else{
                     //System.out.println("ERRORRRRRRRRRSUB");
-                    creacionSubmarinosJuntos(matrizCeldaRival,cantidadCeldasJuntas, celdasRival);
+                    creacionSubmarinosJuntos(matrizCeldaRival,cantidadCeldasJuntas, celdasRival, escucha);
                     break;
                 }
 
@@ -266,7 +280,7 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionDestructoresJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival) {
+    public Celda[][] creacionDestructoresJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival,  ActionListener escucha) {
 
 
 
@@ -280,9 +294,15 @@ Rival rival = new Rival();
                     matrizCeldaRival[fila][columna].setBackground(Color.GREEN);
                     matrizCeldaRival[fila][columna].setEstado(true);
                     matrizCeldaRival[fila][columna].setColor(GREEN);
+                    matrizCeldaRival[fila][columna].setDestructor(true);
+                    //matrizCeldaRival[fila][columna].addActionListener(escucha);
                     matrizCeldaRival[fila][columna+1].setBackground(Color.GREEN);
                     matrizCeldaRival[fila][columna+1].setEstado(true);
                     matrizCeldaRival[fila][columna+1].setColor(GREEN);
+                    matrizCeldaRival[fila][columna+1].setDestructor(true);
+                    //matrizCeldaRival[fila][columna+1].addActionListener(escucha);
+                    destructoresRivalRojos(matrizCeldaRival[fila][columna]);
+                    destructoresRivalRojos(matrizCeldaRival[fila][columna+1]);
                     celdasRival.add(matrizCeldaRival[fila][columna]);
                     celdasRival.add(matrizCeldaRival[fila][columna+1]);
                     break;
@@ -291,15 +311,21 @@ Rival rival = new Rival();
                     matrizCeldaRival[fila][columna].setBackground(Color.GREEN);
                     matrizCeldaRival[fila][columna].setEstado(true);
                     matrizCeldaRival[fila][columna].setColor(GREEN);
+                    matrizCeldaRival[fila][columna].setDestructor(true);
+                    //matrizCeldaRival[fila][columna].addActionListener(escucha);
                     matrizCeldaRival[fila+1][columna].setBackground(Color.GREEN);
                     matrizCeldaRival[fila+1][columna].setEstado(true);
                     matrizCeldaRival[fila+1][columna].setColor(GREEN);
+                    matrizCeldaRival[fila+1][columna].setDestructor(true);
+                    //matrizCeldaRival[fila+1][columna].addActionListener(escucha);
+                    destructoresRivalRojos(matrizCeldaRival[fila][columna]);
+                    destructoresRivalRojos(matrizCeldaRival[fila+1][columna]);
                     celdasRival.add(matrizCeldaRival[fila][columna]);
                     celdasRival.add(matrizCeldaRival[fila+1][columna]);
                     break;
                 }else{
                     //System.out.println("ERRORRRRRRRRRDESC");
-                    creacionDestructoresJuntos(matrizCeldaRival,cantidadCeldasJuntas,celdasRival);
+                    creacionDestructoresJuntos(matrizCeldaRival,cantidadCeldasJuntas,celdasRival,escucha);
                     break;
 
                 }
@@ -310,7 +336,7 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionPortaavionJunto(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas,  ArrayList<Celda> celdasRival) {
+    public Celda[][] creacionPortaavionJunto(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas,  ArrayList<Celda> celdasRival, ActionListener escucha) {
 
 
 
@@ -323,15 +349,23 @@ Rival rival = new Rival();
                 matrizCeldaRival[fila][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna].setEstado(true);
                 matrizCeldaRival[fila][columna].setColor(MAGENTA);
-                matrizCeldaRival[fila][columna + 1].setBackground(Color.MAGENTA);
-                matrizCeldaRival[fila][columna + 1].setEstado(true);
-                matrizCeldaRival[fila][columna + 1].setColor(MAGENTA);
-                matrizCeldaRival[fila][columna + 2].setBackground(Color.MAGENTA);
-                matrizCeldaRival[fila][columna + 2].setEstado(true);
-                matrizCeldaRival[fila][columna + 2].setColor(MAGENTA);
-                matrizCeldaRival[fila][columna + 3].setBackground(Color.MAGENTA);
-                matrizCeldaRival[fila][columna + 3].setEstado(true);
-                matrizCeldaRival[fila][columna + 3].setColor(MAGENTA);
+                matrizCeldaRival[fila][columna].setPortaavion(true);
+                //matrizCeldaRival[fila][columna].addActionListener(escucha);
+                matrizCeldaRival[fila][columna+1].setBackground(Color.MAGENTA);
+                matrizCeldaRival[fila][columna+1].setEstado(true);
+                matrizCeldaRival[fila][columna+1].setColor(MAGENTA);
+                matrizCeldaRival[fila][columna+1].setPortaavion(true);
+                //matrizCeldaRival[fila][columna+1].addActionListener(escucha);
+                matrizCeldaRival[fila][columna+2].setBackground(Color.MAGENTA);
+                matrizCeldaRival[fila][columna+2].setEstado(true);
+                matrizCeldaRival[fila][columna+2].setColor(MAGENTA);
+                matrizCeldaRival[fila][columna+2].setPortaavion(true);
+                //matrizCeldaRival[fila][columna+2].addActionListener(escucha);
+                matrizCeldaRival[fila][columna+3].setBackground(Color.MAGENTA);
+                matrizCeldaRival[fila][columna+3].setEstado(true);
+                matrizCeldaRival[fila][columna+3].setColor(MAGENTA);
+                matrizCeldaRival[fila][columna+3].setPortaavion(true);
+                //matrizCeldaRival[fila][columna+3].addActionListener(escucha);
                 celdasRival.add(matrizCeldaRival[fila][columna]);
                 celdasRival.add(matrizCeldaRival[fila][columna+1]);
                 celdasRival.add(matrizCeldaRival[fila][columna+2]);
@@ -341,15 +375,23 @@ Rival rival = new Rival();
                 matrizCeldaRival[fila][columna].setBackground(Color.MAGENTA);
                 matrizCeldaRival[fila][columna].setEstado(true);
                 matrizCeldaRival[fila][columna].setColor(MAGENTA);
-                matrizCeldaRival[fila + 1][columna].setBackground(Color.MAGENTA);
-                matrizCeldaRival[fila + 1][columna].setEstado(true);
-                matrizCeldaRival[fila + 1][columna].setColor(MAGENTA);
-                matrizCeldaRival[fila + 2][columna].setBackground(Color.MAGENTA);
-                matrizCeldaRival[fila + 2][columna].setEstado(true);
-                matrizCeldaRival[fila + 2][columna].setColor(MAGENTA);
-                matrizCeldaRival[fila + 3][columna].setBackground(Color.MAGENTA);
-                matrizCeldaRival[fila + 3][columna].setEstado(true);
-                matrizCeldaRival[fila + 3][columna].setColor(MAGENTA);
+                matrizCeldaRival[fila][columna].setPortaavion(true);
+                //matrizCeldaRival[fila][columna].addActionListener(escucha);
+                matrizCeldaRival[fila+1][columna].setBackground(Color.MAGENTA);
+                matrizCeldaRival[fila+1][columna].setEstado(true);
+                matrizCeldaRival[fila+1][columna].setColor(MAGENTA);
+                matrizCeldaRival[fila+1][columna].setPortaavion(true);
+                //matrizCeldaRival[fila+1][columna].addActionListener(escucha);
+                matrizCeldaRival[fila+2][columna].setBackground(Color.MAGENTA);
+                matrizCeldaRival[fila+2][columna].setEstado(true);
+                matrizCeldaRival[fila+2][columna].setColor(MAGENTA);
+                matrizCeldaRival[fila+2][columna].setPortaavion(true);
+                //matrizCeldaRival[fila+2][columna].addActionListener(escucha);
+                matrizCeldaRival[fila+3][columna].setBackground(Color.MAGENTA);
+                matrizCeldaRival[fila+3][columna].setEstado(true);
+                matrizCeldaRival[fila+3][columna].setColor(MAGENTA);
+                matrizCeldaRival[fila+3][columna].setPortaavion(true);
+                //matrizCeldaRival[fila+3][columna].addActionListener(escucha);
                 celdasRival.add(matrizCeldaRival[fila][columna]);
                 celdasRival.add(matrizCeldaRival[fila+1][columna]);
                 celdasRival.add(matrizCeldaRival[fila+2][columna]);
@@ -357,7 +399,7 @@ Rival rival = new Rival();
                 break;
             }else{
                 //System.out.println("ERRORRRRRRRRR");
-                creacionPortaavionJunto(matrizCeldaRival,cantidadCeldasJuntas, celdasRival);
+                creacionPortaavionJunto(matrizCeldaRival,cantidadCeldasJuntas, celdasRival, escucha);
                 break;
             }
 
@@ -365,6 +407,36 @@ Rival rival = new Rival();
         }
         return matrizCeldaRival;
 
+    }
+
+    public void destructoresRivalRojos(Celda celda){
+
+        if(rival.getDestructores01Rival().size() == 2 && rival.getDestructores02Rival().size() < 2){
+            rival.getDestructores02Rival().add(celda);
+            System.out.println("contador="+rival.getContadorDestructores()+"");
+            rival.setContadorDestructores();
+            System.out.println("PRIMER CICLO");
+
+        }else if(rival.getDestructores01Rival().size() == 2 && rival.getDestructores02Rival().size() <= 1){
+            rival.getDestructores03Rival().add(celda);
+            rival.setContadorDestructores();
+            System.out.println("HOLAAAAAA="+rival.getDestructores02Rival().size()+"");
+            System.out.println("SEGUNDO CICLO");
+
+        }else if(rival.getDestructores01Rival().size() == 2 && rival.getDestructores02Rival().size() == 2){
+            rival.getDestructores03Rival().add(celda);
+            rival.setContadorDestructores();
+            System.out.println("HOLAAAAAA="+rival.getDestructores02Rival().size()+"");
+
+        }else{
+            rival.getDestructores01Rival().add(celda);
+            rival.setContadorDestructores();
+        }
+
+
+        System.out.println("SIZEDES01="+rival.getDestructores01Rival().size()+"");
+        System.out.println("SIZEDES02="+rival.getDestructores02Rival().size()+"");
+        System.out.println("SIZEDES03="+rival.getDestructores03Rival().size()+"");
     }
 
 public Celda[][] matrizJuego(Celda[][] matriz, JPanel tablero){
