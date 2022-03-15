@@ -8,6 +8,7 @@ public class Celda extends JButton {
     int fila;
     int columna;
     boolean estado;
+    boolean estado2;
     Color color;
     boolean fragata;
     boolean destructor;
@@ -47,6 +48,14 @@ public class Celda extends JButton {
         this.fragata = fragata;
     }
 
+    public boolean getEstado2() {
+        return estado2;
+    }
+
+    public void setEstado2(boolean estado2) {
+        this.estado2 = estado2;
+    }
+
     /**Estado 0 = Mar => color: Cyan
      * Estado 1 = Fragata => color: Red
      * Estado 2 = Destructor => color: Green
@@ -83,6 +92,7 @@ public class Celda extends JButton {
         this.fila = fila;
         this.columna = columna;
         this.estado = false;
+        this.estado2 = false;
         this.color = Color.CYAN;
         this.setBackground(color);
         this.fragata = false;

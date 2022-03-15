@@ -453,6 +453,112 @@ public Celda[][] matrizJuego(Celda[][] matriz, JPanel tablero){
     return matriz;
 }
 
+public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor02, Barco destructor03*/){
+
+
+
+
+    Random aleatorio = new Random();
+    int fila = aleatorio.nextInt(9);
+    int columna = aleatorio.nextInt(9);
+
+    if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isFragata() && !matrizCelda[fila][columna].getEstado2()){
+
+        matrizCelda[fila][columna].setEstado2(true);
+        matrizCelda[fila][columna].setBackground(RED);
+        rival.setContadorGanar();
+        System.out.println("PIVOTE 1");
+    }/*else if(!matrizCelda[fila][columna].getEstado2()){
+        turno(matrizCelda);
+
+    }*/else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isDestructor()){
+
+
+        matrizCelda[fila][columna].setGolpes();
+        rival.getArrayGanarAux().add(matrizCelda[fila][columna]);
+        matrizCelda[fila][columna].setBackground(BLACK);
+        rival.setContadorGanar();
+
+
+        System.out.println("PIVOTE 2");
+        if(rival.getArrayGanarAux().size() == 2){
+            if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1){
+
+
+                rival.getArrayGanarAux().get(0).setBackground(RED);
+                rival.getArrayGanarAux().get(1).setBackground(RED);
+                rival.getArrayGanarAux().clear();
+
+            }
+        }
+
+
+    }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isSubmarino()){
+
+        System.out.println("PIVOTE 3");
+        matrizCelda[fila][columna].setGolpes();
+        rival.getArrayGanarAux().add(matrizCelda[fila][columna]);
+        matrizCelda[fila][columna].setBackground(BLACK);
+        rival.setContadorGanar();
+        //rival.setContadorTurno();
+
+
+        if(rival.getArrayGanarAux().size() == 3){
+            if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1 && rival.getArrayGanarAux().get(2).getGolpes() == 1){
+
+
+                rival.getArrayGanarAux().get(0).setBackground(RED);
+                rival.getArrayGanarAux().get(1).setBackground(RED);
+                rival.getArrayGanarAux().get(2).setBackground(RED);
+                rival.getArrayGanarAux().clear();
+
+            }
+        }
+
+
+    }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isPortaavion()){
+
+
+        matrizCelda[fila][columna].setGolpes();
+        rival.getDestructoresRivalAux().add(matrizCelda[fila][columna]);
+        matrizCelda[fila][columna].setBackground(BLACK);
+        rival.setContadorGanar();
+        //rival.setContadorTurno();
+        System.out.println(rival.getDestructoresRivalAux().size());
+
+        if(rival.getArrayGanarAux().size() == 4){
+            if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1 && rival.getArrayGanarAux().get(2).getGolpes() == 1 && rival.getArrayGanarAux().get(3).getGolpes() == 1){
+
+
+                rival.getArrayGanarAux().get(0).setBackground(RED);
+                rival.getArrayGanarAux().get(1).setBackground(RED);
+                rival.getArrayGanarAux().get(2).setBackground(RED);
+                rival.getArrayGanarAux().get(3).setBackground(RED);
+                rival.getArrayGanarAux().clear();
+
+            }
+        }
+
+
+    }else{
+        matrizCelda[fila][columna].setBackground(BLUE);
+        rival.setContadorTurno();
+        System.out.println("FINALLLLLLL");
+    }
+
+    if(rival.getContadorGanar() == 20){
+        JOptionPane.showMessageDialog(null,
+
+                "¡PERDISTE!",
+
+                "PopUp Dialog",
+                JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
+
+}
+
+
     }
 
 

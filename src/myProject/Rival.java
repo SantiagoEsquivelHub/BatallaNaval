@@ -8,15 +8,7 @@ public class Rival {
     private int contadorGanar = 0;
     private int contadorPerder = 0;
     private int contadorDestructores = 0;
-
-    public int getContadorDestructores() {
-        return contadorDestructores;
-    }
-
-    public void setContadorDestructores() {
-        this.contadorDestructores = contadorDestructores+1;
-    }
-
+    private int contadorTurno = 1;
     private ArrayList<Celda> celdasRival = new ArrayList<Celda>();
     private Celda[][] matrizCeldaRivalAparte = new Celda[10][10];
     private Celda[][] matrizCeldaRival = new Celda[10][10];
@@ -28,6 +20,33 @@ public class Rival {
     private ArrayList<Celda> destructores02Rival = new ArrayList<Celda>();
     private ArrayList<Celda> destructores03Rival = new ArrayList<Celda>();
     private ArrayList<Celda> destructoresRivalAux = new ArrayList<Celda>();
+    private ArrayList<Celda> arrayGanarAux = new ArrayList<Celda>();
+
+    public int getContadorTurno() {
+        return contadorTurno;
+    }
+
+    public void setContadorTurno() {
+        this.contadorTurno = contadorTurno+1;
+    }
+
+    public int getContadorGanar() {
+        return contadorGanar;
+    }
+
+    public void setContadorGanar() {
+        this.contadorGanar = contadorGanar+1;
+    }
+
+    public int getContadorDestructores() {
+        return contadorDestructores;
+    }
+
+    public void setContadorDestructores() {
+        this.contadorDestructores = contadorDestructores+1;
+    }
+
+
 
     public ArrayList<Celda> getDestructoresRivalAux() {
         return destructoresRivalAux;
@@ -145,4 +164,11 @@ public class Rival {
         }
     }
 
+    public ArrayList<Celda> getArrayGanarAux() {
+        return arrayGanarAux;
+    }
+
+    public void setArrayGanarAux(ArrayList<Celda> arrayGanarAux) {
+        this.arrayGanarAux = arrayGanarAux;
+    }
 }
