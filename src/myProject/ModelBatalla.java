@@ -15,13 +15,25 @@ public class ModelBatalla {
 int error= 2;
 Rival rival = new Rival();
 
+    /**
+     * Get error private attribute
+     */
+
     public int getError() {
         return error;
     }
 
+    /**
+     * Change error that is passed in the function
+     */
+
     public void setError(int error) {
         this.error = error;
     }
+
+    /**
+     * Check if in an ArrayList "array" all its elements are equal to a single "numero". Both parameters are entered in the function
+     */
 
     public boolean comparadorIgualdad(int numero, ArrayList<Integer> array) {
 
@@ -41,6 +53,10 @@ Rival rival = new Rival();
         }
 
     }
+
+    /**
+     * Compare if in an ArrayList "array" when taking pairs their subtraction is equal to 1, but previously they were arranged in ascending order. The parameter is entered in the function
+     */
 
     public boolean comparadorSeguidos(ArrayList<Integer> array) {
 
@@ -71,6 +87,11 @@ Rival rival = new Rival();
 
     }
 
+    /**
+     * Compare if there is equality in the rows and the numbers are consecutive, or on the contrary, if the condition is met,
+     * a true is returned and if it is false, a message is shown to the user that he can select other cells, he has a maximum of 2 attempts,
+     * if exceeds them, the game is closed.
+     */
 
     public boolean comparador (boolean igualdadFilas, boolean seguidosColumnas, boolean igualdadColumnas, boolean seguidosFilas, Celda[][] matrizCelda, ArrayList<Celda> celditas, ActionListener escucha) {
         //if (destructor01.getContador() == 2) {
@@ -100,71 +121,84 @@ Rival rival = new Rival();
         //}
     }
 
-
+    /**
+     *Assign "fila" and "columna" parameters to a "barco(fragatas)" based on a "contador"
+     */
 
     public void fragatas (ArrayList<Barco> barcos, int fila, int columna, int contador) {
 
         if(contador == 1){
             barcos.get(0).setFilasArray(fila);
-            System.out.println("Fila fragata01= "+fila+"");
+            //System.out.println("Fila fragata01= "+fila+"");
             barcos.get(0).setColumnasArray(columna);
-            System.out.println("Columna fragata01= "+columna+"");
+            //System.out.println("Columna fragata01= "+columna+"");
         }else if(contador == 2){
             barcos.get(1).setFilasArray(fila);
-            System.out.println("Fila fragata02= "+fila+"");
+            //System.out.println("Fila fragata02= "+fila+"");
             barcos.get(1).setColumnasArray(columna);
-            System.out.println("Columna fragata02= "+columna+"");
+            //System.out.println("Columna fragata02= "+columna+"");
         }else if(contador == 3){
             barcos.get(2).setFilasArray(fila);
-            System.out.println("Fila fragata03= "+fila+"");
+            //System.out.println("Fila fragata03= "+fila+"");
             barcos.get(2).setColumnasArray(columna);
-            System.out.println("Columna fragata03= "+columna+"");
+            //System.out.println("Columna fragata03= "+columna+"");
         }else if(contador == 4){
             barcos.get(3).setFilasArray(fila);
-            System.out.println("Fila fragata04= "+fila+"");
+            //System.out.println("Fila fragata04= "+fila+"");
             barcos.get(3).setColumnasArray(columna);
-            System.out.println("Columna fragata04= "+columna+"");
+            //System.out.println("Columna fragata04= "+columna+"");
         }
 
         }
+
+    /**
+     *Assign "fila" and "columna" parameters to a "barco(destructores)" based on a "contador"
+     */
 
     public void destructores (ArrayList<Barco> barcos, int fila, int columna, int contador) {
 
         if(contador == 1 || contador == 2){
             barcos.get(0).setFilasArray(fila);
-            System.out.println("Fila destructor01= "+fila+"");
+            //System.out.println("Fila destructor01= "+fila+"");
             barcos.get(0).setColumnasArray(columna);
-            System.out.println("Columna destructor01= "+columna+"");
+            //System.out.println("Columna destructor01= "+columna+"");
         }else if(contador == 3 || contador == 4){
             barcos.get(1).setFilasArray(fila);
-            System.out.println("Fila destructor02= "+fila+"");
+            //System.out.println("Fila destructor02= "+fila+"");
             barcos.get(1).setColumnasArray(columna);
-            System.out.println("Columna destructor02= "+columna+"");
+            //System.out.println("Columna destructor02= "+columna+"");
         }else if(contador == 5 || contador == 6){
             barcos.get(2).setFilasArray(fila);
-            System.out.println("Fila destructor03= "+fila+"");
+            //System.out.println("Fila destructor03= "+fila+"");
             barcos.get(2).setColumnasArray(columna);
-            System.out.println("Columna destructor03= "+columna+"");
+            //System.out.println("Columna destructor03= "+columna+"");
         }
 
     }
+
+    /**
+     *Assign "fila" and "columna" parameters to a "barco(submarinos)" based on a "contador"
+     */
 
     public void submarinos(ArrayList<Barco> barcos, int fila, int columna, int contador) {
 
         if(contador == 1 || contador == 2 || contador == 3 ){
             barcos.get(0).setFilasArray(fila);
-            System.out.println("Fila submarino01= "+fila+"");
+            //System.out.println("Fila submarino01= "+fila+"");
             barcos.get(0).setColumnasArray(columna);
-            System.out.println("Columna submarino01= "+columna+"");
+            //System.out.println("Columna submarino01= "+columna+"");
         }else if(contador == 4 || contador == 5 || contador == 6){
             barcos.get(1).setFilasArray(fila);
-            System.out.println("Fila submarino02= "+fila+"");
+            //System.out.println("Fila submarino02= "+fila+"");
             barcos.get(1).setColumnasArray(columna);
-            System.out.println("Columna submarino02= "+columna+"");
+            //System.out.println("Columna submarino02= "+columna+"");
         }
 
     }
 
+    /**
+     * Set a listener and change the background to Cyan for all the "Celda" objects of the "matrizCelda"
+     */
 
     public Celda[][] resetCelda( Celda[][] matrizCelda, ArrayList<Celda> miCelda, ActionListener escucha){
 
@@ -177,16 +211,23 @@ Rival rival = new Rival();
         return matrizCelda;
     }
 
+    /**
+     * Remove a listener to all the "Celda" objects of the "matrizCelda"
+     */
+
     public Celda[][] eliminarEscuchasAnteriores( Celda[][] matrizCelda, ArrayList<Celda> misCeldas, ActionListener escucha){
         for(int i = 0; i < misCeldas.size(); i++){
             int fila = misCeldas.get(i).getFila();
             int columna = misCeldas.get(i).getColumna();
             matrizCelda[fila][columna].removeActionListener(escucha);
-            System.out.println("SE QUITARON TODOS LOS ESCUCHAS");
+            //System.out.println("SE QUITARON TODOS LOS ESCUCHAS");
         }
         return matrizCelda;
     }
 
+    /**
+     * Randomly select the positions of rival "fragatas"(computer) and return "matrizRival"
+     */
 
 
     public Celda[][]  fragatasAleatorias(Celda[][] matrizCeldaRival, ArrayList<Celda> celdasRival, ActionListener escucha) {
@@ -216,6 +257,10 @@ Rival rival = new Rival();
 
         return matrizCeldaRival;
     }
+
+    /**
+     * Randomly select the positions of rival "submarinos"(computer) and return "matrizRival"
+     */
 
     public Celda[][] creacionSubmarinosJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival, ActionListener escucha) {
 
@@ -280,6 +325,10 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
+    /**
+     * Randomly select the positions of rival "destructores"(computer) and return "matrizRival"
+     */
+
     public Celda[][] creacionDestructoresJuntos(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas, ArrayList<Celda> celdasRival,  ActionListener escucha) {
 
 
@@ -336,7 +385,11 @@ Rival rival = new Rival();
         return matrizCeldaRival;
     }
 
-    public Celda[][] creacionPortaavionJunto(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas,  ArrayList<Celda> celdasRival, ActionListener escucha) {
+    /**
+     * Randomly select the positions of rival "portaavion"(computer) and return "matrizRival"
+     */
+
+    public void creacionPortaavionJunto(Celda[][] matrizCeldaRival, int cantidadCeldasJuntas,  ArrayList<Celda> celdasRival, ActionListener escucha) {
 
 
 
@@ -405,28 +458,32 @@ Rival rival = new Rival();
 
 
         }
-        return matrizCeldaRival;
+
 
     }
+
+    /**
+     *
+     */
 
     public void destructoresRivalRojos(Celda celda){
 
         if(rival.getDestructores01Rival().size() == 2 && rival.getDestructores02Rival().size() < 2){
             rival.getDestructores02Rival().add(celda);
-            System.out.println("contador="+rival.getContadorDestructores()+"");
+            //System.out.println("contador="+rival.getContadorDestructores()+"");
             rival.setContadorDestructores();
-            System.out.println("PRIMER CICLO");
+            //System.out.println("PRIMER CICLO");
 
         }else if(rival.getDestructores01Rival().size() == 2 && rival.getDestructores02Rival().size() <= 1){
             rival.getDestructores03Rival().add(celda);
             rival.setContadorDestructores();
-            System.out.println("HOLAAAAAA="+rival.getDestructores02Rival().size()+"");
-            System.out.println("SEGUNDO CICLO");
+            //System.out.println("HOLAAAAAA="+rival.getDestructores02Rival().size()+"");
+            //System.out.println("SEGUNDO CICLO");
 
         }else if(rival.getDestructores01Rival().size() == 2 && rival.getDestructores02Rival().size() == 2){
             rival.getDestructores03Rival().add(celda);
             rival.setContadorDestructores();
-            System.out.println("HOLAAAAAA="+rival.getDestructores02Rival().size()+"");
+            //System.out.println("HOLAAAAAA="+rival.getDestructores02Rival().size()+"");
 
         }else{
             rival.getDestructores01Rival().add(celda);
@@ -434,29 +491,13 @@ Rival rival = new Rival();
         }
 
 
-        System.out.println("SIZEDES01="+rival.getDestructores01Rival().size()+"");
-        System.out.println("SIZEDES02="+rival.getDestructores02Rival().size()+"");
-        System.out.println("SIZEDES03="+rival.getDestructores03Rival().size()+"");
     }
 
-public Celda[][] matrizJuego(Celda[][] matriz, JPanel tablero){
-    for(int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-
-            /*matriz[i][j].setColor(matriz[i][j].getColor());
-            matriz[i][j].setBackground(matriz[i][j].getColor());
-            System.out.println(matriz[i][j].getColor());*/
-            //rival.getMatrizCeldaRival()[i][j].setBackground(rival.getMatrizCeldaRival()[i][j].getColor());
-            tablero.add(matriz[i][j]);
-        }
-    }
-    return matriz;
-}
+    /**
+     * Confirm if it is the opponent's turn to choose a random cell from the player's position board, and if so, select it
+     */
 
 public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor02, Barco destructor03*/){
-
-
-
 
     Random aleatorio = new Random();
     int fila = aleatorio.nextInt(9);
@@ -467,20 +508,17 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
         matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setBackground(RED);
         rival.setContadorGanar();
-        System.out.println("PIVOTE 1");
-    }/*else if(!matrizCelda[fila][columna].getEstado2()){
-        turno(matrizCelda);
+        //System.out.println("PIVOTE 1");
+    }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isDestructor()){
 
-    }*/else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isDestructor()){
-
-
+        matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setGolpes();
         rival.getArrayGanarAux().add(matrizCelda[fila][columna]);
         matrizCelda[fila][columna].setBackground(BLACK);
         rival.setContadorGanar();
 
 
-        System.out.println("PIVOTE 2");
+        //System.out.println("PIVOTE 2");
         if(rival.getArrayGanarAux().size() == 2){
             if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1){
 
@@ -494,8 +532,8 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
 
 
     }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isSubmarino()){
-
-        System.out.println("PIVOTE 3");
+        matrizCelda[fila][columna].setEstado2(true);
+        //System.out.println("PIVOTE 3");
         matrizCelda[fila][columna].setGolpes();
         rival.getArrayGanarAux().add(matrizCelda[fila][columna]);
         matrizCelda[fila][columna].setBackground(BLACK);
@@ -518,13 +556,13 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
 
     }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isPortaavion()){
 
-
+        matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setGolpes();
         rival.getDestructoresRivalAux().add(matrizCelda[fila][columna]);
         matrizCelda[fila][columna].setBackground(BLACK);
         rival.setContadorGanar();
         //rival.setContadorTurno();
-        System.out.println(rival.getDestructoresRivalAux().size());
+        //System.out.println(rival.getDestructoresRivalAux().size());
 
         if(rival.getArrayGanarAux().size() == 4){
             if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1 && rival.getArrayGanarAux().get(2).getGolpes() == 1 && rival.getArrayGanarAux().get(3).getGolpes() == 1){
@@ -540,10 +578,14 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
         }
 
 
-    }else{
+    }/*else if(matrizCelda[fila][columna].getEstado2()){
+        turno(matrizCelda);
+
+    }*/else{
+        matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setBackground(BLUE);
         rival.setContadorTurno();
-        System.out.println("FINALLLLLLL");
+        //System.out.println("FINALLLLLLL");
     }
 
     if(rival.getContadorGanar() == 20){

@@ -16,78 +16,6 @@ public class Celda extends JButton {
     boolean portaavion;
     int golpes;
 
-    public boolean isSubmarino() {
-        return submarino;
-    }
-
-    public void setSubmarino(boolean submarino) {
-        this.submarino = submarino;
-    }
-
-    public boolean isPortaavion() {
-        return portaavion;
-    }
-
-    public void setPortaavion(boolean portaavion) {
-        this.portaavion = portaavion;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public boolean isFragata() {
-        return fragata;
-    }
-
-    public void setFragata(boolean fragata) {
-        this.fragata = fragata;
-    }
-
-    public boolean getEstado2() {
-        return estado2;
-    }
-
-    public void setEstado2(boolean estado2) {
-        this.estado2 = estado2;
-    }
-
-    /**Estado 0 = Mar => color: Cyan
-     * Estado 1 = Fragata => color: Red
-     * Estado 2 = Destructor => color: Green
-     * Estado 3 = Submarino => Color: Green
-     * Estado 4 = Portaavion => Color: Pink
-     * */
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public boolean isDestructor() {
-        return destructor;
-    }
-
-    public void setDestructor(boolean destructor) {
-        this.destructor = destructor;
-    }
-
-    public int getGolpes() {
-        return golpes;
-    }
-
-    public void setGolpes() {
-        this.golpes = golpes+1;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-
     public Celda(int fila, int columna){
         this.fila = fila;
         this.columna = columna;
@@ -102,15 +30,147 @@ public class Celda extends JButton {
         this.golpes = 0;
     }
 
+    /**
+     * Get submarino private attribute
+     */
+
+    public boolean isSubmarino() {
+        return submarino;
+    }
+
+    /**
+     * Change submarino that is passed in the function
+     */
+
+    public void setSubmarino(boolean submarino) {
+        this.submarino = submarino;
+    }
+
+    /**
+     * Get portaavion private attribute
+     */
+
+    public boolean isPortaavion() {
+        return portaavion;
+    }
+
+    /**
+     * Change portaavion that is passed in the function
+     */
+
+    public void setPortaavion(boolean portaavion) {
+        this.portaavion = portaavion;
+    }
+
+    /**
+     * Get color private attribute
+     */
+
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * Change color that is passed in the function
+     */
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * Get fragata private attribute
+     */
+
+    public boolean isFragata() {
+        return fragata;
+    }
+
+    /**
+     * Change fragata that is passed in the function
+     */
+
+    public void setFragata(boolean fragata) {
+        this.fragata = fragata;
+    }
+
+    /**
+     * Get estado2 private attribute
+     */
+
+    public boolean getEstado2() {
+        return estado2;
+    }
+
+    /**
+     * Change estado2 that is passed in the function
+     */
+
+    public void setEstado2(boolean estado2) {
+        this.estado2 = estado2;
+    }
+
+    /**
+     * Get estado private attribute
+     */
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    /**
+     * Get destuctor private attribute
+     */
+
+    public boolean isDestructor() {
+        return destructor;
+    }
+
+    /**
+     * Change destructor that is passed in the function
+     */
+
+    public void setDestructor(boolean destructor) {
+        this.destructor = destructor;
+    }
+
+    /**
+     * Get golpes private attribute
+     */
+
+    public int getGolpes() {
+        return golpes;
+    }
+
+    /**
+     * Add 1 golpes private attribute
+     */
+
+    public void setGolpes() {
+        this.golpes = golpes+1;
+    }
+
+    /**
+     * Change estado that is passed in the function
+     */
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * Get columna private attribute
+     */
+
     public int getColumna() {
 
         return columna;
 
     }
 
-    public void setColumna(int columna) {
-        this.columna = columna;
-    }
+    /**
+     * Get fila private attribute
+     */
 
     public int getFila() {
 
@@ -118,14 +178,17 @@ public class Celda extends JButton {
 
     }
 
-    public void setFila(int fila) {
-
-        this.fila = fila;
-    }
+    /**
+     * Change background color Celda to Gray
+     */
 
     public void cambiarFondo(){
         setBackground(Color.gray);
     }
+
+    /**
+     * Change background color Celda to Cyan
+     */
 
     public void restaurarFondo(){
         setBackground(Color.cyan);

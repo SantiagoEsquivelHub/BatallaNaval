@@ -13,12 +13,55 @@ public class Barco {
         this.contador = contador;
     }
 
+    /**
+     * Change contador that is passed in the function
+     */
+
     public void setContador(int contador) {
         this.contador = contador;
     }
 
+    /**
+     * Get the contador private attribute
+     */
+
     public int getContador() {
         return contador;
+    }
+
+    /**
+     * Get the ArrayList columnasArray private attribute
+     */
+
+    public ArrayList<Integer> getColumnasArray() {
+        return columnasArray;
+    }
+
+    /**
+     * Add numColumnas to columnasArray that is passed in the function
+     */
+
+    public void setColumnasArray(int numColumnas) {
+        columnasArray.add(numColumnas);
+        //System.out.println(numColumnas);
+    }
+
+    /**
+     * Get the ArrayList filasArray private attribute
+     */
+
+    public ArrayList<Integer> getFilasArray() {
+        return filasArray;
+    }
+
+    /**
+     * Add numColumnas to columnasArray that is passed in the function
+     */
+
+    public void setFilasArray(int numFilas) {
+        filasArray.add(numFilas);
+        contador ++;
+        //System.out.println(numFilas);
     }
 
     public int getEstado() {
@@ -27,26 +70,6 @@ public class Barco {
 
     public void setEstado(int estado) {
         this.estado = estado;
-    }
-
-
-    public ArrayList<Integer> getColumnasArray() {
-        return columnasArray;
-    }
-
-    public void setColumnasArray(int numColumnas) {
-        columnasArray.add(numColumnas);
-        //System.out.println(numColumnas);
-    }
-
-    public ArrayList<Integer> getFilasArray() {
-        return filasArray;
-    }
-
-    public void setFilasArray(int numFilas) {
-        filasArray.add(numFilas);
-        contador ++;
-        //System.out.println(numFilas);
     }
 
 }
