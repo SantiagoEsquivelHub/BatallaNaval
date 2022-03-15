@@ -1025,7 +1025,7 @@ public class GUI extends JFrame {
             if (rival.getContadorTurno() % 2 == 0) {
 
 
-                modelBatalla.turno(matrizCelda);
+                modelBatalla.turno(matrizCelda,destructor01);
 
 
             }else{
@@ -1039,10 +1039,10 @@ public class GUI extends JFrame {
                     rival.setContadorPerder();
                     //rival.setContadorTurno();
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda);
+                    modelBatalla.turno(matrizCelda, destructor01);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isDestructor()){
 
-
+                    destructor01.setEstado();
                     celdaSeleccionada1.setGolpes();
                     rival.getDestructoresRivalAux().add(celdaSeleccionada1);
                     celdaSeleccionada1.setBackground(BLACK);
@@ -1050,7 +1050,7 @@ public class GUI extends JFrame {
                    // rival.setContadorTurno();
                     System.out.println(rival.getDestructoresRivalAux().size());
 
-                    if(rival.getDestructoresRivalAux().size() == 2){
+                    if(rival.getDestructoresRivalAux().size() == 2 ){
                         if(rival.getDestructoresRivalAux().get(0).getGolpes() == 1 && rival.getDestructoresRivalAux().get(1).getGolpes() == 1){
 
 
@@ -1061,7 +1061,7 @@ public class GUI extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda);
+                    modelBatalla.turno(matrizCelda,destructor01);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isSubmarino()){
 
 
@@ -1084,7 +1084,7 @@ public class GUI extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda);
+                    modelBatalla.turno(matrizCelda,destructor01);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isPortaavion()){
 
 
@@ -1108,7 +1108,7 @@ public class GUI extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda);
+                    modelBatalla.turno(matrizCelda,destructor01);
                 }else if(celdaSeleccionada1.getEstado()){
 
                     System.out.println("SIZEEE="+rival.getFragatasRival().size()+"");
@@ -1117,13 +1117,13 @@ public class GUI extends JFrame {
                     //rival.setContadorTurno();
                     System.out.println("CONTADORGANAR="+rival.getContadorPerder()+"");
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda);
+                    modelBatalla.turno(matrizCelda,destructor01);
                 }else{
                     //rival.setContadorTurno();
                     celdaSeleccionada1.setBackground(BLUE);
                     celdaSeleccionada1.removeActionListener(escuchaCeldasEnemigas);
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda);
+                    modelBatalla.turno(matrizCelda,destructor01);
                 }
 
                 if(rival.getContadorPerder() == 20){

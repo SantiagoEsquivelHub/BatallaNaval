@@ -497,7 +497,7 @@ Rival rival = new Rival();
      * Confirm if it is the opponent's turn to choose a random cell from the player's position board, and if so, select it
      */
 
-public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor02, Barco destructor03*/){
+public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor02, Barco destructor03*/){
 
     Random aleatorio = new Random();
     int fila = aleatorio.nextInt(9);
@@ -511,6 +511,7 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
         //System.out.println("PIVOTE 1");
     }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isDestructor()){
 
+
         matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setGolpes();
         rival.getArrayGanarAux().add(matrizCelda[fila][columna]);
@@ -522,6 +523,18 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
         if(rival.getArrayGanarAux().size() == 2){
             if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1){
 
+
+               /* if(destructor01.getEstado()){
+
+                    int fila1 = destructor01.getFilasArray().get(0);
+                    int columna1 = destructor01.getColumnasArray().get(0);
+
+                    int fila2 = destructor01.getFilasArray().get(1);
+                    int columna2 = destructor01.getColumnasArray().get(1);
+
+                    matrizCelda[fila1][columna1].setBackground(RED);
+                    matrizCelda[fila2][columna2].setBackground(RED);
+                }*/
 
                 rival.getArrayGanarAux().get(0).setBackground(RED);
                 rival.getArrayGanarAux().get(1).setBackground(RED);
@@ -597,9 +610,22 @@ public void turno(Celda[][] matrizCelda/*, Barco destructor01, Barco destructor0
                 JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }
+    System.out.println("ESTADODEST01="+destructor01.getEstado()+"");
 
 }
 
+public void comparacionDesc(Barco desct01,Barco desct02,Barco desct03){
+    if(desct01.getEstado()){
+
+        int fila1 = desct01.getFilasArray().get(0);
+        int columna1 = desct01.getColumnasArray().get(0);
+
+    }else if(desct02.getEstado()){
+
+    }else if(desct01.getEstado()){
+
+    }
+}
 
     }
 
