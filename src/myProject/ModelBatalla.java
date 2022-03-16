@@ -633,6 +633,10 @@ public void turno(Celda[][] matrizCelda, ArrayList<Celda> celdasDesc01, ArrayLis
 
 }
 
+    /**
+     * If a destructor has sunk it paints it red
+     */
+
 public boolean comparacionDesc(ArrayList<Celda> celdasDesc01, ArrayList<Celda> celdasDesc02, ArrayList<Celda> celdasDesc03){
     if(rival.getArrayGanarAux().equals(celdasDesc01)){
 
@@ -668,6 +672,10 @@ public boolean comparacionDesc(ArrayList<Celda> celdasDesc01, ArrayList<Celda> c
     }
 
 }
+
+    /**
+     * If a submarino has sunk it paints it red
+     */
 
     public boolean comparacionSubmarino(ArrayList<Celda> celdasSub01, ArrayList<Celda> celdasSub02){
         if(rival.getArrayGanarSubAux().equals(celdasSub01)){

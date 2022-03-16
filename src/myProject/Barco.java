@@ -64,9 +64,17 @@ public class Barco {
         //System.out.println(numFilas);
     }
 
+    /**
+     * Get the estado private attribute
+     */
+
     public boolean getEstado() {
         return estado;
     }
+
+    /**
+     * Change the estado private attribute to true
+     */
 
     public void setEstado() {
         this.estado = true;

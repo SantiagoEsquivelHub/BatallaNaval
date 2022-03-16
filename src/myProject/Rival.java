@@ -24,20 +24,20 @@ public class Rival {
     private ArrayList<Celda> arrayGanarSubAux = new ArrayList<Celda>();
     private ArrayList<Celda> arrayGanarPorAux = new ArrayList<Celda>();
 
+    /**
+     * Get ArrayList arrayGanarPorAux private attribute
+     */
+
     public ArrayList<Celda> getArrayGanarPorAux() {
         return arrayGanarPorAux;
     }
 
-    public void setArrayGanarPorAux(ArrayList<Celda> arrayGanarPorAux) {
-        this.arrayGanarPorAux = arrayGanarPorAux;
-    }
+    /**
+     * Get ArrayList arrayGanarSubAux private attribute
+     */
 
     public ArrayList<Celda> getArrayGanarSubAux() {
         return arrayGanarSubAux;
-    }
-
-    public void setArrayGanarSubAux(ArrayList<Celda> arrayGanarSubAux) {
-        this.arrayGanarSubAux = arrayGanarSubAux;
     }
 
     /**
@@ -121,11 +121,6 @@ public class Rival {
         return matrizCeldaRival;
     }
 
-   /* public Celda[][] getMatrizCeldaRivalAparte() {
-
-        return matrizCeldaRival;
-    }*/
-
     /**
      * Get ArrayList arrayGanarAux private attribute
      */
@@ -134,18 +129,33 @@ public class Rival {
         return arrayGanarAux;
     }
 
+    /**
+     * Get ArrayList destructores01Rival private attribute
+     */
 
     public ArrayList<Celda> getDestructores01Rival() {
         return destructores01Rival;
     }
 
+    /**
+     * Get ArrayList destructores02Rival private attribute
+     */
+
     public ArrayList<Celda> getDestructores02Rival() {
         return destructores02Rival;
     }
 
+    /**
+     * Get ArrayList destructores03Rival private attribute
+     */
+
     public ArrayList<Celda> getDestructores03Rival() {
         return destructores03Rival;
     }
+
+    /**
+     * Get ArrayList fragatasRival private attribute
+     */
 
     public ArrayList<Celda> getFragatasRival() {
         return fragatasRival;
