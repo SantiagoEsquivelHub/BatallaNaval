@@ -497,21 +497,23 @@ Rival rival = new Rival();
      * Confirm if it is the opponent's turn to choose a random cell from the player's position board, and if so, select it
      */
 
-public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor02, Barco destructor03*/){
+public void turno(Celda[][] matrizCelda, ArrayList<Celda> celdasDesc01, ArrayList<Celda> celdasDesc02, ArrayList<Celda> celdasDesc03){
 
     Random aleatorio = new Random();
     int fila = aleatorio.nextInt(9);
     int columna = aleatorio.nextInt(9);
 
-    if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isFragata() && !matrizCelda[fila][columna].getEstado2()){
 
+
+    if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isFragata() && !matrizCelda[fila][columna].getEstado2()){
+        matrizCelda[fila][columna].setEstado(false);
         matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setBackground(RED);
         rival.setContadorGanar();
         //System.out.println("PIVOTE 1");
     }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isDestructor()){
 
-
+        matrizCelda[fila][columna].setEstado(false);
         matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setGolpes();
         rival.getArrayGanarAux().add(matrizCelda[fila][columna]);
@@ -519,11 +521,12 @@ public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor0
         rival.setContadorGanar();
 
 
+
         //System.out.println("PIVOTE 2");
         if(rival.getArrayGanarAux().size() == 2){
-            if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1){
+            if(rival.getArrayGanarAux().get(0).getGolpes() == 1 && rival.getArrayGanarAux().get(1).getGolpes() == 1 && comparacionDesc(celdasDesc01, celdasDesc02, celdasDesc03)){
 
-
+                System.out.println("YEIIIIIIIIIIIII");
                /* if(destructor01.getEstado()){
 
                     int fila1 = destructor01.getFilasArray().get(0);
@@ -536,15 +539,16 @@ public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor0
                     matrizCelda[fila2][columna2].setBackground(RED);
                 }*/
 
-                rival.getArrayGanarAux().get(0).setBackground(RED);
+               /* rival.getArrayGanarAux().get(0).setBackground(RED);
                 rival.getArrayGanarAux().get(1).setBackground(RED);
-                rival.getArrayGanarAux().clear();
+                rival.getArrayGanarAux().clear();*/
 
             }
         }
 
 
     }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isSubmarino()){
+        matrizCelda[fila][columna].setEstado(false);
         matrizCelda[fila][columna].setEstado2(true);
         //System.out.println("PIVOTE 3");
         matrizCelda[fila][columna].setGolpes();
@@ -568,7 +572,7 @@ public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor0
 
 
     }else if(matrizCelda[fila][columna].getEstado() && matrizCelda[fila][columna].isPortaavion()){
-
+        matrizCelda[fila][columna].setEstado(false);
         matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setGolpes();
         rival.getDestructoresRivalAux().add(matrizCelda[fila][columna]);
@@ -591,12 +595,15 @@ public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor0
         }
 
 
-    }/*else if(matrizCelda[fila][columna].getEstado2()){
-        turno(matrizCelda);
+    }else if(matrizCelda[fila][columna].getEstado2() && !matrizCelda[fila][columna].getEstado()){
+        turno(matrizCelda,celdasDesc01,celdasDesc02,celdasDesc03);
 
-    }*/else{
+    }else{
+
         matrizCelda[fila][columna].setEstado2(true);
         matrizCelda[fila][columna].setBackground(BLUE);
+
+
         rival.setContadorTurno();
         //System.out.println("FINALLLLLLL");
     }
@@ -610,21 +617,35 @@ public void turno(Celda[][] matrizCelda, Barco destructor01/*, Barco destructor0
                 JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }
-    System.out.println("ESTADODEST01="+destructor01.getEstado()+"");
+
 
 }
 
-public void comparacionDesc(Barco desct01,Barco desct02,Barco desct03){
-    if(desct01.getEstado()){
+public boolean comparacionDesc(ArrayList<Celda> celdasDesc01, ArrayList<Celda> celdasDesc02, ArrayList<Celda> celdasDesc03){
+    if(rival.getArrayGanarAux().equals(celdasDesc01)){
 
-        int fila1 = desct01.getFilasArray().get(0);
-        int columna1 = desct01.getColumnasArray().get(0);
+        celdasDesc01.get(0).setBackground(RED);
+        celdasDesc01.get(1).setBackground(RED);
+        rival.getArrayGanarAux().clear();
+        return  true;
+    }else if(rival.getArrayGanarAux().equals(celdasDesc02)){
 
-    }else if(desct02.getEstado()){
+        celdasDesc01.get(0).setBackground(RED);
+        celdasDesc01.get(1).setBackground(RED);
+        rival.getArrayGanarAux().clear();
+        return  true;
+    }else if(rival.getArrayGanarAux().equals(celdasDesc03)){
 
-    }else if(desct01.getEstado()){
+        celdasDesc01.get(0).setBackground(RED);
+        celdasDesc01.get(1).setBackground(RED);
+        rival.getArrayGanarAux().clear();
+        return  true;
+    }else{
+        System.out.println("NO SON IGUALES");
+        return false;
 
     }
+
 }
 
     }

@@ -456,6 +456,8 @@ public class GUI extends JFrame {
 
                         switch (destructor01.getContador()){
                             case 1:
+                                celdaSeleccionada.setEstado(true);
+                                celdaSeleccionada.setDestructor(true);
                                 //System.out.println("destructor01Contador=" + destructor01.getContador() + "");
                                 rival.getArrayGanarAux().add(celdaSeleccionada);
                                 celdasDest01.add(celdaSeleccionada);
@@ -468,11 +470,12 @@ public class GUI extends JFrame {
 
                                 destructor01.setContador(2);
                                 //System.out.println("destructor01Contador=" + destructor01.getContador() + "");
-                                celdaSeleccionada.setEstado(true);
-                                celdaSeleccionada.setDestructor(true);
+
 
                                 break;
                             case 2:
+                                celdaSeleccionada.setEstado(true);
+                                celdaSeleccionada.setDestructor(true);
                                 //System.out.println("destructor01ContadorDEBESER2=" + destructor01.getContador() + "");
                                 //System.out.println("CASO 22222222222");
                                 rival.getArrayGanarAux().add(celdaSeleccionada);
@@ -484,8 +487,7 @@ public class GUI extends JFrame {
                                 celdaSeleccionada.setBackground(Color.GREEN);
                                 //System.out.println("destructor01ContadorDEBESER2=" + destructor01.getContador() + "");
 
-                                celdaSeleccionada.setEstado(true);
-                                celdaSeleccionada.setDestructor(true);
+
 
                                 //System.out.println("celdasDest01="+celdasDest01.size()+"");
 
@@ -532,6 +534,8 @@ public class GUI extends JFrame {
 
                                 break;
                             case 4:
+                                celdaSeleccionada.setEstado(true);
+                                celdaSeleccionada.setDestructor(true);
                                 //System.out.println("destructor01Contador=" + destructor01.getContador() + "");
                                 rival.getArrayGanarAux().add(celdaSeleccionada);
                                 celdasDest02.add(celdaSeleccionada);
@@ -539,8 +543,7 @@ public class GUI extends JFrame {
                                 celdaSeleccionada.removeActionListener(escuchaDestructores);
                                 //System.out.println("celdasDest02="+celdasDest02.size()+"");
 
-                                celdaSeleccionada.setEstado(true);
-                                celdaSeleccionada.setDestructor(true);
+
 
                                 //System.out.println("SEBASSSSSSSSSSSSSSSSSSSSSSSS");
 
@@ -565,6 +568,8 @@ public class GUI extends JFrame {
                                 }
 
                             case 5:
+                                celdaSeleccionada.setEstado(true);
+                                celdaSeleccionada.setDestructor(true);
                                 //System.out.println("destructor01Contador=" + destructor01.getContador() + "");
                                 rival.getArrayGanarAux().add(celdaSeleccionada);
                                 //System.out.println("caso 5");
@@ -579,11 +584,12 @@ public class GUI extends JFrame {
 
                                 destructor01.setContador(6);
                                 //System.out.println("destructor01111111111111111111Contador=" + destructor01.getContador() + "");
-                                celdaSeleccionada.setEstado(true);
-                                celdaSeleccionada.setDestructor(true);
+
 
                                 break;
                             case 6:
+                                celdaSeleccionada.setEstado(true);
+                                celdaSeleccionada.setDestructor(true);
                                 //System.out.println("destructor01Contador=" + destructor01.getContador() + "");
                                 rival.getArrayGanarAux().add(celdaSeleccionada);
                                 //System.out.println("caso 6");
@@ -591,8 +597,7 @@ public class GUI extends JFrame {
                                 celdasDest03.add(celdaSeleccionada);
                                 destructoresAnteriores.add(celdaSeleccionada);
                                 celdaSeleccionada.removeActionListener(escuchaDestructores);
-                                celdaSeleccionada.setEstado(true);
-                                celdaSeleccionada.setDestructor(true);
+
 
                                 //System.out.println("celdasDest03="+celdasDest03.size()+"");
 
@@ -1025,7 +1030,7 @@ public class GUI extends JFrame {
             if (rival.getContadorTurno() % 2 == 0) {
 
 
-                modelBatalla.turno(matrizCelda,destructor01);
+                modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
 
 
             }else{
@@ -1039,7 +1044,7 @@ public class GUI extends JFrame {
                     rival.setContadorPerder();
                     //rival.setContadorTurno();
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda, destructor01);
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isDestructor()){
 
                     destructor01.setEstado();
@@ -1061,7 +1066,7 @@ public class GUI extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,destructor01);
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isSubmarino()){
 
 
@@ -1084,7 +1089,7 @@ public class GUI extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,destructor01);
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isPortaavion()){
 
 
@@ -1108,7 +1113,7 @@ public class GUI extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,destructor01);
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
                 }else if(celdaSeleccionada1.getEstado()){
 
                     System.out.println("SIZEEE="+rival.getFragatasRival().size()+"");
@@ -1117,13 +1122,13 @@ public class GUI extends JFrame {
                     //rival.setContadorTurno();
                     System.out.println("CONTADORGANAR="+rival.getContadorPerder()+"");
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,destructor01);
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
                 }else{
                     //rival.setContadorTurno();
                     celdaSeleccionada1.setBackground(BLUE);
                     celdaSeleccionada1.removeActionListener(escuchaCeldasEnemigas);
                     JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,destructor01);
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
                 }
 
                 if(rival.getContadorPerder() == 20){
