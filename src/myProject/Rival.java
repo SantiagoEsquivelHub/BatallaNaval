@@ -21,6 +21,24 @@ public class Rival {
     private ArrayList<Celda> destructores03Rival = new ArrayList<Celda>();
     private ArrayList<Celda> destructoresRivalAux = new ArrayList<Celda>();
     private ArrayList<Celda> arrayGanarAux = new ArrayList<Celda>();
+    private ArrayList<Celda> arrayGanarSubAux = new ArrayList<Celda>();
+    private ArrayList<Celda> arrayGanarPorAux = new ArrayList<Celda>();
+
+    public ArrayList<Celda> getArrayGanarPorAux() {
+        return arrayGanarPorAux;
+    }
+
+    public void setArrayGanarPorAux(ArrayList<Celda> arrayGanarPorAux) {
+        this.arrayGanarPorAux = arrayGanarPorAux;
+    }
+
+    public ArrayList<Celda> getArrayGanarSubAux() {
+        return arrayGanarSubAux;
+    }
+
+    public void setArrayGanarSubAux(ArrayList<Celda> arrayGanarSubAux) {
+        this.arrayGanarSubAux = arrayGanarSubAux;
+    }
 
     /**
      * Get contadorTurno private attribute

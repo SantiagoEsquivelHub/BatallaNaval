@@ -1030,7 +1030,7 @@ public class GUI extends JFrame {
             if (rival.getContadorTurno() % 2 == 0) {
 
 
-                modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03,celdasSub01, celdasSub02);
 
 
             }else{
@@ -1043,8 +1043,8 @@ public class GUI extends JFrame {
                     celdaSeleccionada1.setBackground(RED);
                     rival.setContadorPerder();
                     //rival.setContadorTurno();
-                    JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                    //JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03, celdasSub01, celdasSub02);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isDestructor()){
 
                     destructor01.setEstado();
@@ -1065,8 +1065,8 @@ public class GUI extends JFrame {
 
                         }
                     }
-                    JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                    //JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03, celdasSub01, celdasSub02);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isSubmarino()){
 
 
@@ -1088,8 +1088,8 @@ public class GUI extends JFrame {
 
                         }
                     }
-                    JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                    //JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03, celdasSub01, celdasSub02);
                 }else if(celdaSeleccionada1.getEstado() && celdaSeleccionada1.isPortaavion()){
 
 
@@ -1112,8 +1112,8 @@ public class GUI extends JFrame {
 
                         }
                     }
-                    JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                    //JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03, celdasSub01, celdasSub02);
                 }else if(celdaSeleccionada1.getEstado()){
 
                     System.out.println("SIZEEE="+rival.getFragatasRival().size()+"");
@@ -1121,14 +1121,14 @@ public class GUI extends JFrame {
                     rival.setContadorPerder();
                     //rival.setContadorTurno();
                     System.out.println("CONTADORGANAR="+rival.getContadorPerder()+"");
-                    JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                    //JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03, celdasSub01, celdasSub02);
                 }else{
                     //rival.setContadorTurno();
                     celdaSeleccionada1.setBackground(BLUE);
                     celdaSeleccionada1.removeActionListener(escuchaCeldasEnemigas);
-                    JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
-                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03);
+                    //JOptionPane.showMessageDialog(null, "TURNO DEL RIVAL");
+                    modelBatalla.turno(matrizCelda,celdasDest01,celdasDest02,celdasDest03, celdasSub01, celdasSub02);
                 }
 
                 if(rival.getContadorPerder() == 20){
